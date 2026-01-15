@@ -35,6 +35,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Globe,
+  Menu,
 } from "lucide-react";
 
 const Projects = () => {
@@ -42,14 +43,20 @@ const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [sortBy, setSortBy] = useState("newest");
   const filterRef = useRef(null);
+  const sortRef = useRef(null);
 
-  // Close filter menu when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
         setShowFilterMenu(false);
+      }
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setShowSortMenu(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -432,95 +439,112 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50 overflow-x-hidden pt-10 lg:pt-0">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-20 md:py-28 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-12 md:py-20 lg:py-28 overflow-hidden">
         {/* Background pattern */}
         <div className="absolute inset-0 bg-grid-white/10 opacity-5"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="lg:w-2/3">
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-8 border border-white/20">
-                  <FolderKanban className="w-6 h-6" />
-                  <span className="text-sm font-semibold">
+        <div className="w-full max-w-full px-4 relative z-10">
+          <div className="w-full mx-auto">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+              <div className="lg:w-2/3 w-full">
+                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full mb-6 md:mb-8 border border-white/20">
+                  <FolderKanban className="w-5 h-5 md:w-6 md:h-6" />
+                  <span className="text-xs md:text-sm font-semibold">
                     Project Portfolio
                   </span>
-                  <Sparkles className="w-4 h-4 text-yellow-300" />
+                  <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-yellow-300" />
                 </div>
 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                   Engineering
-                  <span className="block text-blue-200 mt-2">
+                  <span className="block text-blue-200 mt-1 md:mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                     Excellence Showcase
                   </span>
                 </h1>
-                <p className="text-xl text-blue-100 mb-10 max-w-3xl leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-6 md:mb-10 max-w-full leading-relaxed">
                   Discover our portfolio of innovative industrial projects where
-                  precision engineering meets successful execution. Each project
-                  tells a story of collaboration, innovation, and excellence.
+                  precision engineering meets successful execution.
                 </p>
 
                 {/* Quick stats */}
-                <div className="flex flex-wrap gap-6 mb-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-white/10 rounded-lg">
-                      <Award className="w-5 h-5" />
+                      <Award className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-xl md:text-2xl font-bold">
                         {stats.avgRating}/5
                       </div>
-                      <div className="text-blue-200 text-sm">Avg. Rating</div>
+                      <div className="text-blue-200 text-xs md:text-sm">
+                        Avg. Rating
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-white/10 rounded-lg">
-                      <Users className="w-5 h-5" />
+                      <Users className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">{stats.teamSize}</div>
-                      <div className="text-blue-200 text-sm">Expert Team</div>
+                      <div className="text-xl md:text-2xl font-bold">
+                        {stats.teamSize}
+                      </div>
+                      <div className="text-blue-200 text-xs md:text-sm">
+                        Expert Team
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 col-span-2 sm:col-span-1">
                     <div className="p-2 bg-white/10 rounded-lg">
-                      <Globe className="w-5 h-5" />
+                      <Globe className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">
+                      <div className="text-xl md:text-2xl font-bold">
                         {stats.countries}
                       </div>
-                      <div className="text-blue-200 text-sm">Countries</div>
+                      <div className="text-blue-200 text-xs md:text-sm">
+                        Countries
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Hero illustration */}
-              <div className="lg:w-1/3">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full mb-4">
-                      <Target className="w-10 h-10 text-white" />
+              <div className="lg:w-1/3 w-full">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white/20">
+                  <div className="text-center mb-4 md:mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full mb-3 md:mb-4">
+                      <Target className="w-8 h-8 md:w-10 md:h-10 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold">Project Success</h3>
-                    <p className="text-blue-200">98% Client Satisfaction</p>
+                    <h3 className="text-xl md:text-2xl font-bold">
+                      Project Success
+                    </h3>
+                    <p className="text-blue-200 text-sm md:text-base">
+                      98% Client Satisfaction
+                    </p>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-200">On-time Delivery</span>
-                      <span className="font-bold">96%</span>
+                      <span className="text-blue-200 text-sm md:text-base">
+                        On-time Delivery
+                      </span>
+                      <span className="font-bold text-sm md:text-base">96%</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-200">Budget Adherence</span>
-                      <span className="font-bold">94%</span>
+                      <span className="text-blue-200 text-sm md:text-base">
+                        Budget Adherence
+                      </span>
+                      <span className="font-bold text-sm md:text-base">94%</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-200">Quality Score</span>
-                      <span className="font-bold">4.9/5</span>
+                      <span className="text-blue-200 text-sm md:text-base">
+                        Quality Score
+                      </span>
+                      <span className="font-bold text-sm md:text-base">4.9/5</span>
                     </div>
                   </div>
                 </div>
@@ -531,18 +555,18 @@ const Projects = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-white border-y border-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+      <section className="py-6 md:py-12 bg-white border-y border-gray-100">
+        <div className="w-full max-w-full px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-6 w-full mx-auto">
             {Object.entries(stats).map(([key, value]) => (
               <div
                 key={key}
-                className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl border border-gray-200 shadow-sm text-center hover-lift group"
+                className="bg-gradient-to-br from-white to-gray-50 p-3 md:p-6 rounded-xl md:rounded-2xl border border-gray-200 shadow-sm text-center hover-lift group"
               >
-                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <div className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 md:mb-2 group-hover:text-blue-600 transition-colors">
                   {value}
                 </div>
-                <div className="text-gray-600 text-sm capitalize">
+                <div className="text-gray-600 text-xs md:text-sm capitalize">
                   {key.replace(/([A-Z])/g, " $1").trim()}
                 </div>
               </div>
@@ -551,10 +575,133 @@ const Projects = () => {
         </div>
       </section>
 
+      {/* Mobile Filter Toggle */}
+      <div className="md:hidden bg-white border-b border-gray-200">
+        <div className="w-full max-w-full px-4 py-4">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-3 rounded-xl font-medium"
+            >
+              <Filter className="w-5 h-5" />
+              <span>Filters & Sort</span>
+            </button>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">
+                {sortedProjects.length} projects
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Filter Panel */}
+      {showMobileFilters && (
+        <div className="md:hidden fixed inset-0 bg-black/50 z-50" onClick={() => setShowMobileFilters(false)}>
+          <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="p-4 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold text-gray-900">Filters & Sort</h3>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            <div className="p-4 overflow-y-auto h-[calc(100vh-120px)]">
+              {/* Search */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Search
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search projects..."
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Sort Options */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Sort By
+                </label>
+                <div className="space-y-2">
+                  {sortOptions.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => {
+                        setSortBy(option.id);
+                        setShowMobileFilters(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left rounded-lg transition-colors ${
+                        sortBy === option.id
+                          ? "bg-blue-50 text-blue-700 border-2 border-blue-500"
+                          : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span>{option.label}</span>
+                        {sortBy === option.id && (
+                          <CheckCircle className="w-5 h-5 text-blue-600" />
+                        )}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Filters */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Quick Filters
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {quickFilters.map((filter) => (
+                    <button
+                      key={filter.id}
+                      onClick={() => {
+                        handleQuickFilter(filter.id);
+                        setShowMobileFilters(false);
+                      }}
+                      className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200"
+                    >
+                      {filter.icon}
+                      <span className="text-xs text-gray-700 mt-1 text-center">
+                        {filter.label}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Clear Filters */}
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedFilter("all");
+                  setShowMobileFilters(false);
+                }}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-lg font-semibold transition-all"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Controls Section */}
-      <section className="py-8 bg-white/50 backdrop-blur-sm border-b border-gray-200">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+      <section className="py-6 md:py-8 bg-white/50 backdrop-blur-sm border-b border-gray-200 hidden md:block">
+        <div className="w-full max-w-full px-4">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-center justify-between">
             {/* Search and Quick Filters */}
             <div className="flex-1 w-full">
               <div className="relative mb-4">
@@ -562,7 +709,7 @@ const Projects = () => {
                 <input
                   type="text"
                   placeholder="Search projects, technologies, clients..."
-                  className="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 md:py-3.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -577,7 +724,7 @@ const Projects = () => {
               </div>
 
               {/* Quick Filters */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3">
                 <span className="text-sm text-gray-600 flex items-center">
                   <Sparkles className="w-4 h-4 mr-2" />
                   Quick filters:
@@ -586,66 +733,66 @@ const Projects = () => {
                   <button
                     key={filter.id}
                     onClick={() => handleQuickFilter(filter.id)}
-                    className="inline-flex items-center gap-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-full transition-colors"
+                    className="inline-flex items-center gap-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-colors"
                   >
                     {filter.icon}
-                    {filter.label}
+                    <span className="hidden sm:inline">{filter.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* View Controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               {/* View Toggle */}
-              <div className="flex items-center gap-2 bg-gray-100 rounded-xl p-1.5">
+              <div className="flex items-center gap-1 md:gap-2 bg-gray-100 rounded-xl p-1">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-2.5 rounded-lg transition-all ${
+                  className={`p-2 rounded-lg transition-all ${
                     viewMode === "grid"
                       ? "bg-white shadow-lg text-blue-600"
                       : "hover:bg-gray-200 text-gray-600"
                   }`}
                 >
-                  <Grid className="w-5 h-5" />
+                  <Grid className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-2.5 rounded-lg transition-all ${
+                  className={`p-2 rounded-lg transition-all ${
                     viewMode === "list"
                       ? "bg-white shadow-lg text-blue-600"
                       : "hover:bg-gray-200 text-gray-600"
                   }`}
                 >
-                  <List className="w-5 h-5" />
+                  <List className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </div>
 
               {/* Sort Dropdown */}
-              <div className="relative" ref={filterRef}>
+              <div className="relative" ref={sortRef}>
                 <button
-                  onClick={() => setShowFilterMenu(!showFilterMenu)}
-                  className="flex items-center gap-2 bg-white border border-gray-300 hover:border-blue-500 px-4 py-3 rounded-xl transition-colors shadow-sm"
+                  onClick={() => setShowSortMenu(!showSortMenu)}
+                  className="flex items-center gap-2 bg-white border border-gray-300 hover:border-blue-500 px-3 md:px-4 py-2.5 md:py-3 rounded-xl transition-colors shadow-sm"
                 >
-                  <BarChart className="w-5 h-5" />
-                  <span>
+                  <BarChart className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="hidden sm:inline">
                     Sort: {sortOptions.find((s) => s.id === sortBy)?.label}
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
-                      showFilterMenu ? "rotate-180" : ""
+                      showSortMenu ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
-                {showFilterMenu && (
+                {showSortMenu && (
                   <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 animate-fade-in">
                     {sortOptions.map((option) => (
                       <button
                         key={option.id}
                         onClick={() => {
                           setSortBy(option.id);
-                          setShowFilterMenu(false);
+                          setShowSortMenu(false);
                         }}
                         className={`w-full px-4 py-3 text-left flex items-center justify-between hover:bg-blue-50 transition-colors ${
                           sortBy === option.id
@@ -653,7 +800,7 @@ const Projects = () => {
                             : "text-gray-700"
                         }`}
                       >
-                        <span>{option.label}</span>
+                        <span className="text-sm">{option.label}</span>
                         {sortBy === option.id && (
                           <CheckCircle className="w-4 h-4 text-blue-600" />
                         )}
@@ -663,88 +810,95 @@ const Projects = () => {
                 )}
               </div>
 
-              {/* Filter Dropdown */}
+              {/* Clear Filters */}
               <div className="relative">
                 <button
-                  onClick={() => setSelectedFilter("all")}
-                  className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  onClick={() => {
+                    setSelectedFilter("all");
+                    setSearchQuery("");
+                  }}
+                  className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
-                  <Filter className="w-5 h-5" />
-                  <span>Clear Filters</span>
+                  <Filter className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="hidden sm:inline">Clear Filters</span>
+                  <span className="sm:hidden">Clear</span>
                 </button>
               </div>
             </div>
           </div>
 
           {/* Active filters and results */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-200">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-gray-700 font-medium">
+          <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 mt-4 md:mt-6 pt-4 md:pt-6 border-t border-gray-200">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3">
+              <span className="text-gray-700 font-medium text-sm md:text-base">
                 {sortedProjects.length} projects found
               </span>
 
               {/* Active filter badge */}
               {selectedFilter !== "all" && (
-                <div className="flex items-center gap-2 bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 px-4 py-2 rounded-full border border-blue-200">
-                  <span className="font-medium">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-blue-100 to-blue-50 text-blue-700 px-3 py-1.5 rounded-full border border-blue-200">
+                  <span className="font-medium text-sm">
                     {filters.find((f) => f.id === selectedFilter)?.label}
                   </span>
                   <button
                     onClick={() => setSelectedFilter("all")}
-                    className="hover:bg-blue-200 rounded-full p-1 transition-colors"
+                    className="hover:bg-blue-200 rounded-full p-0.5 transition-colors"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-3 h-3" />
                   </button>
                 </div>
               )}
 
               {/* Search query badge */}
               {searchQuery && (
-                <div className="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-full">
-                  <span className="font-medium">Search: "{searchQuery}"</span>
+                <div className="flex items-center gap-2 bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full">
+                  <span className="font-medium text-sm">
+                    Search: "{searchQuery}"
+                  </span>
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="hover:bg-gray-200 rounded-full p-1 transition-colors"
+                    className="hover:bg-gray-200 rounded-full p-0.5 transition-colors"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-3 h-3" />
                   </button>
                 </div>
               )}
             </div>
 
             {/* View mode info */}
-            <div className="text-sm text-gray-500">
+            <div className="text-xs md:text-sm text-gray-500">
               {viewMode === "grid" ? "Grid View" : "List View"}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Filter Categories */}
-      <section className="py-6 bg-gray-50/50 border-b border-gray-200">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap gap-4 justify-center">
+      {/* Filter Categories - Horizontal Scroll for Mobile */}
+      <section className="py-4 md:py-6 bg-gray-50/50 border-b border-gray-200 overflow-x-auto">
+        <div className="w-full min-w-max px-4">
+          <div className="flex gap-2 md:gap-4 pb-2">
             {filters.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setSelectedFilter(filter.id)}
-                className={`group relative flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-300 ${
+                className={`group relative flex flex-col items-center p-3 md:p-4 rounded-xl border-2 transition-all duration-300 flex-shrink-0 ${
                   selectedFilter === filter.id
                     ? "border-blue-500 bg-white shadow-lg scale-105"
                     : "border-gray-200 hover:border-gray-300 hover:bg-white"
                 }`}
+                style={{ minWidth: "100px" }}
               >
                 <div
-                  className={`p-3 rounded-lg mb-3 ${
+                  className={`p-2 md:p-3 rounded-lg mb-2 md:mb-3 ${
                     selectedFilter === filter.id
                       ? "bg-gradient-to-br " + filter.color
                       : "bg-gray-100 group-hover:bg-gray-200"
                   }`}
                 >
-                  {filter.icon || <Package className="w-6 h-6" />}
+                  {filter.icon || <Package className="w-5 h-5 md:w-6 md:h-6" />}
                 </div>
                 <span
-                  className={`font-medium ${
+                  className={`font-medium text-xs md:text-sm text-center ${
                     selectedFilter === filter.id
                       ? "text-blue-700"
                       : "text-gray-700"
@@ -753,7 +907,7 @@ const Projects = () => {
                   {filter.label}
                 </span>
                 <span
-                  className={`text-sm mt-1 ${
+                  className={`text-xs mt-1 ${
                     selectedFilter === filter.id
                       ? "text-blue-600"
                       : "text-gray-500"
@@ -768,11 +922,11 @@ const Projects = () => {
       </section>
 
       {/* Projects Grid/List */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+      <section className="py-8 md:py-12">
+        <div className="w-full max-w-full px-4">
           {sortedProjects.length > 0 ? (
             viewMode === "grid" ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
                 {sortedProjects.map((project) => (
                   <ProjectCard
                     key={project.id}
@@ -782,7 +936,7 @@ const Projects = () => {
                 ))}
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {sortedProjects.map((project) => (
                   <ProjectCard
                     key={project.id}
@@ -793,14 +947,14 @@ const Projects = () => {
               </div>
             )
           ) : (
-            <div className="text-center py-20">
-              <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full mb-6">
-                <FolderKanban className="w-12 h-12 text-blue-600" />
+            <div className="text-center py-12 md:py-20">
+              <div className="inline-flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full mb-4 md:mb-6">
+                <FolderKanban className="w-8 h-8 md:w-12 md:h-12 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 md:mb-3">
                 No projects found
               </h3>
-              <p className="text-gray-600 mb-6 max-w-md mx-auto">
+              <p className="text-gray-600 mb-4 md:mb-6 max-w-md mx-auto text-sm md:text-base">
                 Try adjusting your search terms or filter criteria to discover
                 amazing projects.
               </p>
@@ -809,9 +963,9 @@ const Projects = () => {
                   setSearchQuery("");
                   setSelectedFilter("all");
                 }}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 md:w-5 md:h-5" />
                 Clear all filters
               </button>
             </div>
@@ -820,56 +974,56 @@ const Projects = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden">
+      <section className="relative py-12 md:py-16 lg:py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/10 opacity-5"></div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full -translate-y-32 translate-x-32"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/20 rounded-full translate-y-48 -translate-x-48"></div>
+        <div className="absolute top-0 right-0 w-32 h-32 md:w-64 md:h-64 bg-blue-500/20 rounded-full -translate-y-16 translate-x-16 md:-translate-y-32 md:translate-x-32"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 md:w-96 md:h-96 bg-indigo-500/20 rounded-full translate-y-24 -translate-x-24 md:translate-y-48 md:-translate-x-48"></div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-8 py-4 rounded-full mb-8 border border-white/20">
-              <Target className="w-6 h-6" />
-              <span className="text-lg font-semibold">Ready to Start?</span>
+        <div className="w-full max-w-full px-4 relative z-10">
+          <div className="max-w-full mx-auto text-center">
+            <div className="inline-flex items-center gap-2 md:gap-3 bg-white/10 backdrop-blur-sm px-4 py-2 md:px-8 md:py-4 rounded-full mb-6 md:mb-8 border border-white/20">
+              <Target className="w-5 h-5 md:w-6 md:h-6" />
+              <span className="text-sm md:text-lg font-semibold">Ready to Start?</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8">
               Let's Build Something
-              <span className="block text-blue-200 mt-2">Amazing Together</span>
+              <span className="block text-blue-200 mt-1 md:mt-2">Amazing Together</span>
             </h2>
-            <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-blue-100 mb-8 md:mb-12 max-w-full md:max-w-2xl mx-auto leading-relaxed">
               Share your project vision with us. Our engineering experts are
               ready to transform your ideas into successful, executed projects.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
               <Link
                 to="/contact"
-                className="group bg-white hover:bg-gray-50 text-blue-700 px-12 py-5 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3"
+                className="group bg-white hover:bg-gray-50 text-blue-700 px-6 md:px-8 lg:px-12 py-3 md:py-4 lg:py-5 rounded-xl font-bold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl md:shadow-2xl flex items-center justify-center gap-2 md:gap-3"
               >
                 <span>Start Your Project</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform" />
               </Link>
               <Link
                 to="/services"
-                className="group border-2 border-white hover:border-blue-300 text-white hover:text-blue-100 px-12 py-5 rounded-xl font-bold text-lg transition-all duration-300 hover:bg-white/10 flex items-center justify-center gap-3"
+                className="group border-2 border-white hover:border-blue-300 text-white hover:text-blue-100 px-6 md:px-8 lg:px-12 py-3 md:py-4 lg:py-5 rounded-xl font-bold text-base md:text-lg transition-all duration-300 hover:bg-white/10 flex items-center justify-center gap-2 md:gap-3"
               >
                 <span>Explore Services</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-3 gap-8 mt-16">
+            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-8 md:mt-16">
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">24/7</div>
-                <div className="text-blue-200">Support</div>
+                <div className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">24/7</div>
+                <div className="text-blue-200 text-xs md:text-sm">Support</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">30+</div>
-                <div className="text-blue-200">Expert Engineers</div>
+                <div className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">30+</div>
+                <div className="text-blue-200 text-xs md:text-sm">Expert Engineers</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-blue-200">Confidentiality</div>
+                <div className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">100%</div>
+                <div className="text-blue-200 text-xs md:text-sm">Confidentiality</div>
               </div>
             </div>
           </div>
@@ -884,19 +1038,19 @@ const ProjectCard = ({ project, viewMode }) => {
   const getCategoryIcon = (category) => {
     switch (category) {
       case "CPC Plants":
-        return <Factory className="w-5 h-5" />;
+        return <Factory className="w-4 h-4 md:w-5 md:h-5" />;
       case "ECA Plants":
-        return <Zap className="w-5 h-5" />;
+        return <Zap className="w-4 h-4 md:w-5 md:h-5" />;
       case "Paste Plants":
-        return <Cog className="w-5 h-5" />;
+        return <Cog className="w-4 h-4 md:w-5 md:h-5" />;
       case "WHRB/HRU":
-        return <Thermometer className="w-5 h-5" />;
+        return <Thermometer className="w-4 h-4 md:w-5 md:h-5" />;
       case "Tyre Pyrolysis":
-        return <FlaskRound className="w-5 h-5" />;
+        return <FlaskRound className="w-4 h-4 md:w-5 md:h-5" />;
       case "Structures":
-        return <Building className="w-5 h-5" />;
+        return <Building className="w-4 h-4 md:w-5 md:h-5" />;
       default:
-        return <Package className="w-5 h-5" />;
+        return <Package className="w-4 h-4 md:w-5 md:h-5" />;
     }
   };
 
@@ -910,40 +1064,40 @@ const ProjectCard = ({ project, viewMode }) => {
     return (
       <Link
         to={`/projects/${project.id}`}
-        className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-500 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover-lift"
+        className="group bg-white rounded-xl md:rounded-2xl border border-gray-200 hover:border-blue-500 shadow-lg hover:shadow-xl md:hover:shadow-2xl transition-all duration-500 overflow-hidden hover-lift"
       >
-        <div className="p-8">
-          <div className="flex flex-col lg:flex-row gap-8">
+        <div className="p-4 md:p-6 lg:p-8">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8">
             {/* Image section */}
-            <div className="lg:w-72 lg:h-56 relative overflow-hidden rounded-xl flex-shrink-0">
+            <div className="lg:w-72 lg:h-48 xl:h-56 relative overflow-hidden rounded-xl flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
               <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute top-4 right-4 z-20">
+              <div className="absolute top-2 md:top-4 right-2 md:right-4 z-20">
                 <span
-                  className={`px-4 py-2 bg-gradient-to-r ${getStatusColor(
+                  className={`px-2 md:px-4 py-1 md:py-2 bg-gradient-to-r ${getStatusColor(
                     project.status
-                  )} text-white rounded-full text-sm font-semibold shadow-lg`}
+                  )} text-white rounded-full text-xs md:text-sm font-semibold shadow-lg`}
                 >
                   {project.status}
                 </span>
               </div>
-              <div className="absolute bottom-4 left-4 z-20">
-                <div className="flex items-center gap-2">
+              <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 z-20">
+                <div className="flex items-center gap-1 md:gap-2">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${
+                      className={`w-3 h-3 md:w-4 md:h-4 ${
                         i < Math.floor(project.rating)
                           ? "text-yellow-400 fill-current"
                           : "text-gray-300"
                       }`}
                     />
                   ))}
-                  <span className="text-white text-sm font-medium ml-2">
+                  <span className="text-white text-xs md:text-sm font-medium ml-1 md:ml-2">
                     {project.rating}
                   </span>
                 </div>
@@ -952,96 +1106,101 @@ const ProjectCard = ({ project, viewMode }) => {
 
             {/* Content section */}
             <div className="flex-1">
-              <div className="flex flex-wrap items-start justify-between mb-6">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 bg-blue-50 text-blue-600 rounded-lg">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4 md:mb-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                    <div className="p-1.5 md:p-2.5 bg-blue-50 text-blue-600 rounded-lg">
                       {getCategoryIcon(project.category)}
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-700">
+                    <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-blue-700">
                       {project.title}
                     </h3>
                   </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                        <Building className="w-4 h-4 text-gray-600" />
+                  <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-3 md:mb-4">
+                    <div className="flex items-center gap-1 md:gap-2">
+                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                        <Building className="w-3 h-3 md:w-4 md:h-4 text-gray-600" />
                       </div>
                       <div>
-                        <div className="text-sm text-gray-500">Client</div>
-                        <div className="font-medium">{project.client}</div>
+                        <div className="text-xs md:text-sm text-gray-500">Client</div>
+                        <div className="font-medium text-sm md:text-base">{project.client}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-                        <MapPin className="w-4 h-4 text-gray-600" />
+                    <div className="flex items-center gap-1 md:gap-2">
+                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                        <MapPin className="w-3 h-3 md:w-4 md:h-4 text-gray-600" />
                       </div>
                       <div>
-                        <div className="text-sm text-gray-500">Location</div>
-                        <div className="font-medium">{project.location}</div>
+                        <div className="text-xs md:text-sm text-gray-500">Location</div>
+                        <div className="font-medium text-sm md:text-base">{project.location}</div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">
                       {project.budget}
                     </div>
-                    <div className="text-sm text-gray-500">Budget</div>
+                    <div className="text-xs md:text-sm text-gray-500">Budget</div>
                   </div>
-                  <ExternalLink className="w-6 h-6 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                  <ExternalLink className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-gray-400 group-hover:text-blue-600 transition-colors" />
                 </div>
               </div>
 
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="text-gray-600 mb-4 md:mb-6 leading-relaxed text-sm md:text-base line-clamp-2">
                 {project.description}
               </p>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Calendar className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Duration</span>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4 md:mb-6">
+                <div className="bg-gray-50 p-2 md:p-4 rounded-lg">
+                  <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
+                    <Calendar className="w-3 h-3 md:w-4 md:h-4 text-gray-500" />
+                    <span className="text-xs md:text-sm text-gray-600">Duration</span>
                   </div>
-                  <div className="font-semibold">{project.duration}</div>
+                  <div className="font-semibold text-sm md:text-base">{project.duration}</div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Team</span>
+                <div className="bg-gray-50 p-2 md:p-4 rounded-lg">
+                  <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
+                    <Users className="w-3 h-3 md:w-4 md:h-4 text-gray-500" />
+                    <span className="text-xs md:text-sm text-gray-600">Team</span>
                   </div>
-                  <div className="font-semibold">
+                  <div className="font-semibold text-sm md:text-base">
                     {project.teamSize} members
                   </div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Completed</span>
+                <div className="bg-gray-50 p-2 md:p-4 rounded-lg">
+                  <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
+                    <Clock className="w-3 h-3 md:w-4 md:h-4 text-gray-500" />
+                    <span className="text-xs md:text-sm text-gray-600">Completed</span>
                   </div>
-                  <div className="font-semibold">{project.completionDate}</div>
+                  <div className="font-semibold text-sm md:text-base">{project.completionDate}</div>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">Rating</span>
+                <div className="bg-gray-50 p-2 md:p-4 rounded-lg">
+                  <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
+                    <TrendingUp className="w-3 h-3 md:w-4 md:h-4 text-gray-500" />
+                    <span className="text-xs md:text-sm text-gray-600">Rating</span>
                   </div>
-                  <div className="font-semibold">{project.rating}/5</div>
+                  <div className="font-semibold text-sm md:text-base">{project.rating}/5</div>
                 </div>
               </div>
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, index) => (
+              <div className="flex flex-wrap gap-1 md:gap-2">
+                {project.tags.slice(0, 3).map((tag, index) => (
                   <span
                     key={index}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 rounded-full text-sm font-medium"
+                    className="px-2 md:px-4 py-1 md:py-2 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 rounded-full text-xs md:text-sm font-medium"
                   >
                     {tag}
                   </span>
                 ))}
+                {project.tags.length > 3 && (
+                  <span className="px-2 md:px-4 py-1 md:py-2 bg-gray-100 text-gray-600 rounded-full text-xs md:text-sm font-medium">
+                    +{project.tags.length - 3}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -1050,13 +1209,14 @@ const ProjectCard = ({ project, viewMode }) => {
     );
   }
 
+  // Grid View
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-500 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col hover-lift"
+      className="group bg-white rounded-xl md:rounded-2xl border border-gray-200 hover:border-blue-500 shadow-lg hover:shadow-xl md:hover:shadow-2xl transition-all duration-500 overflow-hidden h-full flex flex-col hover-lift"
     >
       {/* Image header with gradient overlay */}
-      <div className="relative h-56 overflow-hidden">
+      <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
         <img
           src={project.image}
@@ -1065,49 +1225,49 @@ const ProjectCard = ({ project, viewMode }) => {
         />
 
         {/* Status badge */}
-        <div className="absolute top-4 right-4 z-20">
+        <div className="absolute top-2 md:top-4 right-2 md:right-4 z-20">
           <span
-            className={`px-4 py-2 bg-gradient-to-r ${getStatusColor(
+            className={`px-2 md:px-4 py-1 md:py-2 bg-gradient-to-r ${getStatusColor(
               project.status
-            )} text-white rounded-full text-sm font-semibold shadow-lg`}
+            )} text-white rounded-full text-xs md:text-sm font-semibold shadow-lg`}
           >
             {project.status}
           </span>
         </div>
 
         {/* Rating */}
-        <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+        <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 z-20 flex items-center gap-1 md:gap-2">
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`w-4 h-4 ${
+              className={`w-3 h-3 md:w-4 md:h-4 ${
                 i < Math.floor(project.rating)
                   ? "text-yellow-400 fill-current"
                   : "text-gray-300"
               }`}
             />
           ))}
-          <span className="text-white text-sm font-medium ml-2">
+          <span className="text-white text-xs md:text-sm font-medium ml-1 md:ml-2">
             {project.rating}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-4 md:p-6 flex-1 flex flex-col">
         {/* Category and client */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg">
+        <div className="flex items-start justify-between mb-3 md:mb-4">
+          <div className="flex items-center gap-2 md:gap-3">
+            <div className="p-1.5 md:p-2.5 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg">
               {getCategoryIcon(project.category)}
             </div>
             <div>
               <div className="text-xs text-gray-500">Client</div>
-              <div className="font-medium text-sm">{project.client}</div>
+              <div className="font-medium text-sm line-clamp-1">{project.client}</div>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-xl font-bold text-gray-900">
+            <div className="text-lg md:text-xl font-bold text-gray-900">
               {project.budget}
             </div>
             <div className="text-xs text-gray-500">Budget</div>
@@ -1115,60 +1275,60 @@ const ProjectCard = ({ project, viewMode }) => {
         </div>
 
         {/* Title and description */}
-        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-700 mb-3 line-clamp-1">
+        <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 group-hover:text-blue-700 mb-2 md:mb-3 line-clamp-1">
           {project.title}
         </h3>
-        <p className="text-gray-600 mb-4 line-clamp-2 flex-1">
+        <p className="text-gray-600 mb-3 md:mb-4 line-clamp-2 text-sm md:text-base flex-1">
           {project.description}
         </p>
 
         {/* Quick stats */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="flex items-center gap-2 text-gray-600">
-            <Calendar className="w-4 h-4" />
-            <span className="text-sm">{project.duration}</span>
+        <div className="grid grid-cols-2 gap-2 md:gap-3 mb-3 md:mb-4">
+          <div className="flex items-center gap-1 md:gap-2 text-gray-600">
+            <Calendar className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm truncate">{project.duration}</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-600">
-            <MapPin className="w-4 h-4" />
-            <span className="text-sm">{project.location}</span>
+          <div className="flex items-center gap-1 md:gap-2 text-gray-600">
+            <MapPin className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm truncate">{project.location}</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-600">
-            <Users className="w-4 h-4" />
-            <span className="text-sm">{project.teamSize} team</span>
+          <div className="flex items-center gap-1 md:gap-2 text-gray-600">
+            <Users className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm truncate">{project.teamSize} team</span>
           </div>
-          <div className="flex items-center gap-2 text-gray-600">
-            <Clock className="w-4 h-4" />
-            <span className="text-sm">{project.completionDate}</span>
+          <div className="flex items-center gap-1 md:gap-2 text-gray-600">
+            <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+            <span className="text-xs md:text-sm truncate">{project.completionDate}</span>
           </div>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-1 md:gap-2 mb-4 md:mb-6">
           {project.tags.slice(0, 2).map((tag, index) => (
             <span
               key={index}
-              className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium"
+              className="px-2 md:px-3 py-1 md:py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 2 && (
-            <span className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium">
-              +{project.tags.length - 2} more
+            <span className="px-2 md:px-3 py-1 md:py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-medium">
+              +{project.tags.length - 2}
             </span>
           )}
         </div>
 
         {/* Footer with CTA */}
-        <div className="mt-auto pt-4 border-t border-gray-100">
+        <div className="mt-auto pt-3 md:pt-4 border-t border-gray-100">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-green-500" />
-              <span className="text-sm text-gray-500">Quality Certified</span>
+            <div className="flex items-center gap-1 md:gap-2">
+              <Shield className="w-3 h-3 md:w-4 md:h-4 text-green-500" />
+              <span className="text-xs md:text-sm text-gray-500">Quality Certified</span>
             </div>
-            <div className="flex items-center gap-2 text-blue-600 group-hover:text-blue-700 font-medium">
+            <div className="flex items-center gap-1 md:gap-2 text-blue-600 group-hover:text-blue-700 font-medium text-sm md:text-base">
               <span>View Details</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-2 transition-transform" />
             </div>
           </div>
         </div>

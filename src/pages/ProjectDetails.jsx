@@ -233,17 +233,18 @@ const ProjectDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
+      <div className="bg-white border-b border-gray-200 overflow-x-hidden">
+        <div className="w-full max-w-full px-4 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-gray-600 hover:text-blue-700"
             >
               <ArrowLeft className="w-5 h-5" />
-              <span>Back to Projects</span>
+              <span className="hidden sm:inline">Back to Projects</span>
+              <span className="sm:hidden">Back</span>
             </button>
 
             <div className="flex items-center gap-4">
@@ -252,7 +253,7 @@ const ProjectDetails = () => {
                 className="flex items-center gap-2 text-gray-600 hover:text-blue-700"
               >
                 <Share2 className="w-5 h-5" />
-                <span>Share</span>
+                <span className="hidden sm:inline">Share</span>
               </button>
             </div>
           </div>
@@ -260,71 +261,71 @@ const ProjectDetails = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-        <div className="container mx-auto px-4 py-12 md:py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-8 items-start">
-              <div className="flex-1">
-                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full mb-8">
+      <section className="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-x-hidden">
+        <div className="w-full max-w-full px-4 py-8 md:py-12 lg:py-16">
+          <div className="w-full">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+              <div className="flex-1 w-full">
+                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8">
                   {getCategoryIcon(project.category)}
-                  <span className="font-semibold">{project.category}</span>
+                  <span className="font-semibold text-sm sm:text-base">{project.category}</span>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                   {project.title}
                 </h1>
 
-                <p className="text-xl text-gray-300 mb-8 max-w-3xl">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-full">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-6 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-4 sm:gap-6 mb-6 sm:mb-8">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white/10 rounded-lg">
-                      <Calendar className="w-6 h-6" />
+                    <div className="p-2 sm:p-3 bg-white/10 rounded-lg">
+                      <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300">Duration</div>
-                      <div className="font-semibold">{project.duration}</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Duration</div>
+                      <div className="font-semibold text-sm sm:text-base">{project.duration}</div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white/10 rounded-lg">
-                      <MapPin className="w-6 h-6" />
+                    <div className="p-2 sm:p-3 bg-white/10 rounded-lg">
+                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300">Location</div>
-                      <div className="font-semibold">{project.location}</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Location</div>
+                      <div className="font-semibold text-sm sm:text-base">{project.location}</div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white/10 rounded-lg">
-                      <DollarSign className="w-6 h-6" />
+                    <div className="p-2 sm:p-3 bg-white/10 rounded-lg">
+                      <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300">Budget</div>
-                      <div className="font-semibold">{project.budget}</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Budget</div>
+                      <div className="font-semibold text-sm sm:text-base">{project.budget}</div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-white/10 rounded-lg">
-                      <Users className="w-6 h-6" />
+                    <div className="p-2 sm:p-3 bg-white/10 rounded-lg">
+                      <Users className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300">Team Size</div>
-                      <div className="font-semibold">
+                      <div className="text-xs sm:text-sm text-gray-300">Team Size</div>
+                      <div className="font-semibold text-sm sm:text-base">
                         {project.teamSize} members
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   <span
-                    className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
                       project.status === "Completed"
                         ? "bg-green-500/20 text-green-300"
                         : "bg-blue-500/20 text-blue-300"
@@ -332,44 +333,44 @@ const ProjectDetails = () => {
                   >
                     {project.status}
                   </span>
-                  <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm">
+                  <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm">
                     Completed: {project.completionDate}
                   </span>
-                  <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm">
+                  <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm">
                     {project.clientIndustry}
                   </span>
-                  <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm">
+                  <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs sm:text-sm">
                     {project.projectType} Project
                   </span>
                 </div>
               </div>
 
-              <div className="w-full lg:w-96">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                  <h3 className="text-xl font-bold mb-4">
+              <div className="w-full lg:w-96 mt-6 lg:mt-0">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-bold mb-4">
                     Project Quick Facts
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Client</span>
-                      <span className="font-semibold">{project.client}</span>
+                      <span className="text-gray-300 text-sm sm:text-base">Client</span>
+                      <span className="font-semibold text-sm sm:text-base">{project.client}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Category</span>
-                      <span className="font-semibold">{project.category}</span>
+                      <span className="text-gray-300 text-sm sm:text-base">Category</span>
+                      <span className="font-semibold text-sm sm:text-base">{project.category}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Duration</span>
-                      <span className="font-semibold">{project.duration}</span>
+                      <span className="text-gray-300 text-sm sm:text-base">Duration</span>
+                      <span className="font-semibold text-sm sm:text-base">{project.duration}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Budget</span>
-                      <span className="font-semibold">{project.budget}</span>
+                      <span className="text-gray-300 text-sm sm:text-base">Budget</span>
+                      <span className="font-semibold text-sm sm:text-base">{project.budget}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-300">Status</span>
+                      <span className="text-gray-300 text-sm sm:text-base">Status</span>
                       <span
-                        className={`font-semibold ${
+                        className={`font-semibold text-sm sm:text-base ${
                           project.status === "Completed"
                             ? "text-green-400"
                             : "text-blue-400"
@@ -383,9 +384,9 @@ const ProjectDetails = () => {
                   <div className="mt-6 pt-6 border-t border-white/20">
                     <Link
                       to="/contact"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors text-sm sm:text-base"
                     >
-                      <MessageCircle className="w-5 h-5" />
+                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                       Discuss Similar Project
                     </Link>
                   </div>
@@ -397,14 +398,14 @@ const ProjectDetails = () => {
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8">
+      <div className="w-full max-w-full px-4 py-8 sm:py-12">
+        <div className="w-full">
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Left Column - Main Content */}
-            <div className="lg:col-span-2 space-y-12">
+            <div className="lg:col-span-2 space-y-8 sm:space-y-12">
               {/* Image Gallery */}
-              <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="relative h-96 bg-gray-200">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden">
+                <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200">
                   <img
                     src={project.images[activeImage]}
                     alt={`${project.title} - View ${activeImage + 1}`}
@@ -416,9 +417,9 @@ const ProjectDetails = () => {
                         prev > 0 ? prev - 1 : project.images.length - 1
                       )
                     }
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg"
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-1 sm:p-2 rounded-full shadow-lg"
                   >
-                    <ChevronLeft className="w-6 h-6" />
+                    <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
                   </button>
                   <button
                     onClick={() =>
@@ -426,16 +427,16 @@ const ProjectDetails = () => {
                         (prev) => (prev + 1) % project.images.length
                       )
                     }
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg"
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-1 sm:p-2 rounded-full shadow-lg"
                   >
-                    <ChevronRight className="w-6 h-6" />
+                    <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
                   </button>
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                  <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1 sm:gap-2">
                     {project.images.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setActiveImage(index)}
-                        className={`w-3 h-3 rounded-full ${
+                        className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
                           index === activeImage ? "bg-white" : "bg-white/50"
                         }`}
                       />
@@ -443,13 +444,13 @@ const ProjectDetails = () => {
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="flex overflow-x-auto gap-2 pb-2">
+                <div className="p-4 sm:p-6">
+                  <div className="flex overflow-x-auto gap-1 sm:gap-2 pb-2 -mx-4 sm:mx-0 px-4 sm:px-0">
                     {project.images.map((img, index) => (
                       <button
                         key={index}
                         onClick={() => setActiveImage(index)}
-                        className={`flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ${
+                        className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg overflow-hidden ${
                           index === activeImage
                             ? "ring-2 ring-blue-500"
                             : "opacity-70 hover:opacity-100"
@@ -467,59 +468,59 @@ const ProjectDetails = () => {
               </div>
 
               {/* Project Overview */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Project Overview
                 </h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-600 mb-6">
+                <div className="prose prose-sm sm:prose-lg max-w-none">
+                  <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
                     {project.detailedDescription}
                   </p>
 
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <AlertCircle className="w-5 h-5 text-amber-500" />
+                      <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                        <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 flex-shrink-0" />
                         Key Challenges
                       </h3>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2 sm:space-y-3">
                         {project.challenges.map((challenge, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-600">{challenge}</span>
+                          <li key={index} className="flex items-start gap-2 sm:gap-3">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-amber-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-600 text-xs sm:text-sm">{challenge}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     <div>
-                      <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                         Our Solutions
                       </h3>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2 sm:space-y-3">
                         {project.solutions.map((solution, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-gray-600">{solution}</span>
+                          <li key={index} className="flex items-start gap-2 sm:gap-3">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                            <span className="text-gray-600 text-xs sm:text-sm">{solution}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
 
-                  <div className="mt-8">
-                    <h3 className="font-bold text-gray-900 mb-4">
+                  <div className="mt-6 sm:mt-8">
+                    <h3 className="font-bold text-gray-900 mb-3 sm:mb-4 text-sm sm:text-base">
                       Project Scope
                     </h3>
-                    <div className="grid sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                       {project.scope.map((item, index) => (
                         <div
                           key={index}
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                          className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-lg"
                         >
-                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                          <span className="text-gray-700">{item}</span>
+                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                          <span className="text-gray-700 text-xs sm:text-sm">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -528,15 +529,15 @@ const ProjectDetails = () => {
               </div>
 
               {/* Technologies Used */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Technologies & Tools
                 </h2>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium"
+                      className="px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-50 text-blue-700 rounded-full text-xs sm:text-sm font-medium"
                     >
                       {tech}
                     </span>
@@ -546,26 +547,26 @@ const ProjectDetails = () => {
             </div>
 
             {/* Right Column - Sidebar */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* Achievements */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Key Achievements
                 </h3>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4">
                   {project.achievements.map((achievement, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl"
+                      className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl"
                     >
-                      <div className="p-3 bg-blue-100 text-blue-600 rounded-lg">
+                      <div className="p-2 sm:p-3 bg-blue-100 text-blue-600 rounded-lg">
                         {achievement.icon}
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-gray-900">
+                        <div className="text-lg sm:text-xl font-bold text-gray-900">
                           {achievement.value}
                         </div>
-                        <div className="text-gray-600">
+                        <div className="text-gray-600 text-xs sm:text-sm">
                           {achievement.metric}
                         </div>
                       </div>
@@ -575,30 +576,30 @@ const ProjectDetails = () => {
               </div>
 
               {/* Milestones Timeline */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                   Project Timeline
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {project.milestones.map((milestone, index) => (
-                    <div key={index} className="flex items-start gap-4">
+                    <div key={index} className="flex items-start gap-3 sm:gap-4">
                       <div
-                        className={`w-3 h-3 rounded-full mt-2 ${
+                        className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full mt-1.5 sm:mt-2 flex-shrink-0 ${
                           milestone.status === "completed"
                             ? "bg-green-500"
                             : "bg-gray-300"
                         }`}
                       ></div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-900">
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-gray-900 text-sm sm:text-base truncate">
                           {milestone.event}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-xs sm:text-sm text-gray-500">
                           {milestone.date}
                         </div>
                       </div>
                       {milestone.status === "completed" && (
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                       )}
                     </div>
                   ))}
@@ -606,93 +607,91 @@ const ProjectDetails = () => {
               </div>
 
               {/* Tags */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
                   Project Tags
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm"
+                      className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-gray-100 text-gray-700 rounded-full text-xs sm:text-sm"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-
-             
             </div>
           </div>
 
           {/* Testimonial */}
-          <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
-            <div className="max-w-3xl mx-auto text-center">
-              <Quote className="w-12 h-12 mx-auto mb-6 opacity-50" />
-              <p className="text-xl md:text-2xl font-medium mb-6">
+          <div className="mt-8 sm:mt-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-white">
+            <div className="max-w-full mx-auto text-center">
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-4 sm:mb-6 opacity-50" />
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-4 sm:mb-6">
                 "{project.testimonials[0].text}"
               </p>
-              <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="flex items-center justify-center gap-1 sm:gap-2 mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-5 h-5 text-yellow-300 fill-current"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 fill-current"
                   />
                 ))}
               </div>
-              <div className="font-bold text-lg">
+              <div className="font-bold text-base sm:text-lg">
                 {project.testimonials[0].author}
               </div>
-              <div className="text-blue-200">
+              <div className="text-blue-200 text-sm sm:text-base">
                 {project.testimonials[0].position}, {project.client}
               </div>
             </div>
           </div>
 
           {/* Similar Projects */}
-          <div className="mt-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">
+          <div className="mt-8 sm:mt-12 lg:mt-16">
+            <div className="flex items-center justify-between mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Similar Projects
               </h2>
               <Link
                 to="/projects"
-                className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2"
+                className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
               >
-                View All Projects
-                <ArrowRight className="w-5 h-5" />
+                View All
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {similarProjects.map((proj) => (
                 <Link
                   key={proj.id}
                   to={`/projects/${proj.id}`}
-                  className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-500 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group bg-white rounded-xl sm:rounded-2xl border border-gray-200 hover:border-blue-500 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-1.5 sm:p-2 bg-blue-50 text-blue-600 rounded-lg">
                         {getCategoryIcon(proj.category)}
                       </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900 group-hover:text-blue-700">
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-gray-900 group-hover:text-blue-700 text-sm sm:text-base truncate">
                           {proj.title}
                         </h3>
-                        <p className="text-sm text-gray-600">{proj.category}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 truncate">{proj.category}</p>
                       </div>
                     </div>
 
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-2 text-gray-600">
-                          <MapPin className="w-4 h-4" />
-                          <span>{proj.location}</span>
+                    <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4">
+                      <div className="flex items-center justify-between text-xs sm:text-sm">
+                        <div className="flex items-center gap-1 sm:gap-2 text-gray-600 truncate">
+                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                          <span className="truncate">{proj.location}</span>
                         </div>
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-semibold flex-shrink-0 ${
                             proj.status === "Completed"
                               ? "bg-green-100 text-green-800"
                               : "bg-blue-100 text-blue-800"
@@ -703,9 +702,9 @@ const ProjectDetails = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-gray-500">
                       <span>View Details</span>
-                      <ExternalLink className="w-4 h-4 group-hover:text-blue-600" />
+                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover:text-blue-600" />
                     </div>
                   </div>
                 </Link>
@@ -714,23 +713,23 @@ const ProjectDetails = () => {
           </div>
 
           {/* Navigation Between Projects */}
-          <div className="mt-16 grid md:grid-cols-2 gap-6">
+          <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <Link
               to={`/projects/${project.prevProject.id}`}
-              className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-500 p-6 transition-all duration-300"
+              className="group bg-white rounded-xl sm:rounded-2xl border border-gray-200 hover:border-blue-500 p-4 sm:p-6 transition-all duration-300"
             >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-gray-100 group-hover:bg-blue-50 rounded-xl">
-                  <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-gray-100 group-hover:bg-blue-50 rounded-lg sm:rounded-xl">
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-600" />
                 </div>
-                <div>
-                  <div className="text-sm text-gray-500 mb-1">
+                <div className="min-w-0">
+                  <div className="text-xs sm:text-sm text-gray-500 mb-1">
                     Previous Project
                   </div>
-                  <div className="font-bold text-gray-900 group-hover:text-blue-700">
+                  <div className="font-bold text-gray-900 group-hover:text-blue-700 text-sm sm:text-base truncate">
                     {project.prevProject.title}
                   </div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-xs sm:text-sm text-gray-600 truncate">
                     {project.prevProject.category}
                   </div>
                 </div>
@@ -739,22 +738,22 @@ const ProjectDetails = () => {
 
             <Link
               to={`/projects/${project.nextProject.id}`}
-              className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-500 p-6 transition-all duration-300"
+              className="group bg-white rounded-xl sm:rounded-2xl border border-gray-200 hover:border-blue-500 p-4 sm:p-6 transition-all duration-300"
             >
-              <div className="flex items-center gap-4">
-                <div>
-                  <div className="text-sm text-gray-500 mb-1 text-right">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="min-w-0 flex-1 text-right">
+                  <div className="text-xs sm:text-sm text-gray-500 mb-1">
                     Next Project
                   </div>
-                  <div className="font-bold text-gray-900 group-hover:text-blue-700 text-right">
+                  <div className="font-bold text-gray-900 group-hover:text-blue-700 text-sm sm:text-base truncate">
                     {project.nextProject.title}
                   </div>
-                  <div className="text-sm text-gray-600 text-right">
+                  <div className="text-xs sm:text-sm text-gray-600 truncate">
                     {project.nextProject.category}
                   </div>
                 </div>
-                <div className="p-3 bg-gray-100 group-hover:bg-blue-50 rounded-xl">
-                  <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+                <div className="p-2 sm:p-3 bg-gray-100 group-hover:bg-blue-50 rounded-lg sm:rounded-xl">
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-600" />
                 </div>
               </div>
             </Link>
@@ -763,28 +762,28 @@ const ProjectDetails = () => {
       </div>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-r from-blue-900 to-blue-700 text-white overflow-x-hidden">
+        <div className="w-full max-w-full px-4 text-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
             Want to Start a Similar Project?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-full mx-auto">
             Our team of experts is ready to help you achieve similar success
             with your industrial project.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               to="/contact"
-              className="bg-white hover:bg-gray-100 text-blue-700 px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-3"
+              className="bg-white hover:bg-gray-100 text-blue-700 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2 sm:gap-3"
             >
-              <MessageCircle className="w-5 h-5" />
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Discuss Your Project</span>
             </Link>
             <a
               href="tel:+911234567890"
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3"
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3"
             >
-              <Phone className="w-5 h-5" />
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Call Now</span>
             </a>
           </div>
