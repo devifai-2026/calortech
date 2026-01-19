@@ -124,14 +124,6 @@ Please respond with relevant details or attach available documents.`;
       bg: "bg-gradient-to-br from-indigo-50 to-indigo-100"
     },
     {
-      icon: <MapPin className="w-8 h-8" />,
-      title: "Global Headquarters",
-      content: "India",
-      secondary: "Serving clients worldwide",
-      color: "from-emerald-600 to-emerald-800",
-      bg: "bg-gradient-to-br from-emerald-50 to-emerald-100"
-    },
-    {
       icon: <Clock className="w-8 h-8" />,
       title: "Working Hours",
       content: "Mon–Sat | 9:00 AM – 7:00 PM",
@@ -174,64 +166,7 @@ Please respond with relevant details or attach available documents.`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50 pt-26 lg:pt-6">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12 fade-in">
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full mb-6 shadow-lg">
-                <Sparkles className="w-5 h-5" />
-                <span className="text-sm font-semibold">Let's Build Together</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Start Your
-                <span className="text-blue-700 block">Engineering Journey</span>
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Connect with our expert engineering team for innovative solutions and seamless project execution
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center hover-lift transform hover:-translate-y-2 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full mb-4">
-                  <Users className="w-7 h-7 text-blue-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900">24/7</div>
-                <div className="text-gray-600 font-medium">Support</div>
-                <div className="text-sm text-gray-500 mt-1">Always Available</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center hover-lift transform hover:-translate-y-2 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-green-100 rounded-full mb-4">
-                  <Clock className="w-7 h-7 text-green-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900">24h</div>
-                <div className="text-gray-600 font-medium">Response Time</div>
-                <div className="text-sm text-gray-500 mt-1">Quick Response</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center hover-lift transform hover:-translate-y-2 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-purple-100 rounded-full mb-4">
-                  <Globe className="w-7 h-7 text-purple-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900">15+</div>
-                <div className="text-gray-600 font-medium">Countries</div>
-                <div className="text-sm text-gray-500 mt-1">Global Reach</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center hover-lift transform hover:-translate-y-2 transition-all duration-300">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-amber-100 rounded-full mb-4">
-                  <Award className="w-7 h-7 text-amber-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900">100+</div>
-                <div className="text-gray-600 font-medium">Projects</div>
-                <div className="text-sm text-gray-500 mt-1">Completed</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
       {/* Main Content */}
       <section className="py-16">
@@ -287,21 +222,7 @@ Please respond with relevant details or attach available documents.`;
                 </div>
               </div>
 
-              {/* Quick Action */}
-              <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 rounded-2xl shadow-xl slide-in-left" style={{ animationDelay: '500ms' }}>
-                <h3 className="text-xl font-bold text-white mb-4">Need Immediate Help?</h3>
-                <p className="text-blue-100 mb-6">Connect with our technical team instantly</p>
-                <a
-                  href="https://wa.me/911234567890"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-blue-700 w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl group"
-                >
-                  <MessageSquare className="w-5 h-5" />
-                  <span>WhatsApp Live Chat</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                </a>
-              </div>
+            
             </div>
 
             {/* Right Column - Forms */}
