@@ -165,11 +165,11 @@ Please respond with relevant details or attach available documents.`;
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50 pt-26 lg:pt-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50 pt-14 lg:pt-4">
     
 
       {/* Main Content */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Column - Contact Info & Process */}

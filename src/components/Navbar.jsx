@@ -5,6 +5,7 @@ import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,6 +18,31 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Set initial active section from hash on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setActiveSection(hash);
+    } else {
+      setActiveSection("hero"); // Default active section
+    }
+  }, []);
+
+  // Update active section when hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      setActiveSection(hash || "hero");
+    };
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
   const navLinks = [
     { name: "Home", path: "/", sectionId: "hero" },
     { name: "Solutions", path: "/", sectionId: "solutions" },
@@ -24,12 +50,15 @@ const Navbar = () => {
     { name: "Process", path: "/", sectionId: "process" },
     { name: "Projects", path: "/", sectionId: "projects" },
     { name: "Contact", path: "/", sectionId: "contact" },
-    { name: "Careers", path: "/", sectionId: "contact" },
+    { name: "Careers", path: "/", sectionId: "careers" },
   ];
 
   const handleNavClick = (path, sectionId, e) => {
     e.preventDefault();
     setIsOpen(false);
+    
+    // Update active section immediately
+    setActiveSection(sectionId);
     
     // If on home page, scroll to section
     if (location.pathname === "/") {
@@ -58,30 +87,33 @@ const Navbar = () => {
       
       // Update URL hash for active state
       window.history.pushState(null, "", `#${sectionId}`);
+      // Update active section state
+      setActiveSection(sectionId);
     }
   };
 
-  // Check if section is active based on hash
+  // Improved active section check
   const isSectionActive = (sectionId) => {
     if (location.pathname !== "/") return false;
     
-    const hash = window.location.hash.slice(1);
+    // Special handling for hero section (when no hash or hash is #hero)
     if (sectionId === "hero") {
-      return hash === "" || hash === "hero";
+      return !window.location.hash || window.location.hash === "#hero" || activeSection === "hero";
     }
-    return hash === sectionId;
+    
+    return activeSection === sectionId || window.location.hash === `#${sectionId}`;
   };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100 py-3" 
-        : "bg-gradient-to-r from-blue-50/80 via-white/80 to-indigo-50/80 backdrop-blur-sm border-b border-gray-100/30 py-4"
+        ? " backdrop-blur-md shadow-xl  py-3" 
+        : "   py-4"
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-3 group" onClick={() => setActiveSection("hero")}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
               scrolled 
                 ? "bg-gradient-to-br from-blue-600 to-blue-800 shadow-lg" 
@@ -91,7 +123,7 @@ const Navbar = () => {
             </div>
             <div>
               <h1 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-                scrolled ? "text-gray-900" : "text-blue-900"
+                scrolled ? "text-blue-700" : "text-white"
               }`}>
                 Calor Tech Engineers
               </h1>
@@ -119,8 +151,8 @@ const Navbar = () => {
                       active
                         ? "text-blue-700 font-semibold"
                         : scrolled
-                        ? "text-gray-700 hover:text-blue-700"
-                        : "text-blue-900 hover:text-blue-700"
+                        ? "text-blue-600 hover:text-blue-700"
+                        : "text-white hover:text-gray-300"
                     }`}
                   >
                     {link.name}
