@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,17 +18,58 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "/", sectionId: "hero" },
+    { name: "Solutions", path: "/", sectionId: "solutions" },
+    { name: "Services", path: "/", sectionId: "services" },
+    { name: "Process", path: "/", sectionId: "process" },
+    { name: "Projects", path: "/", sectionId: "projects" },
+    { name: "Contact", path: "/", sectionId: "contact" },
+    { name: "Careers", path: "/", sectionId: "contact" },
   ];
 
-  const isActive = (path) => {
-    if (path === "/") {
-      return location.pathname === "/";
+  const handleNavClick = (path, sectionId, e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    // If on home page, scroll to section
+    if (location.pathname === "/") {
+      scrollToSection(sectionId);
+    } else {
+      // If not on home page, navigate to home first
+      navigate("/");
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
     }
-    return location.pathname.startsWith(path);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      
+      // Update URL hash for active state
+      window.history.pushState(null, "", `#${sectionId}`);
+    }
+  };
+
+  // Check if section is active based on hash
+  const isSectionActive = (sectionId) => {
+    if (location.pathname !== "/") return false;
+    
+    const hash = window.location.hash.slice(1);
+    if (sectionId === "hero") {
+      return hash === "" || hash === "hero";
+    }
+    return hash === sectionId;
   };
 
   return (
@@ -55,48 +97,59 @@ const Navbar = () => {
               </h1>
               <div className="flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-blue-600" />
-                <p className={`text-xs font-semibold tracking-wider transition-colors duration-300 ${
+                <p className={`text-xs font-semibold italic tracking-wider transition-colors duration-300 ${
                   scrolled ? "text-blue-700" : "text-blue-600"
                 }`}>
-                  ENGINEERING TO EXECUTION
+                  Engineering To Execution
                 </p>
               </div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <div key={link.name} className="relative">
-                <Link
-                  to={link.path}
-                  className={`relative px-1 py-2 transition-all duration-300 font-medium ${
-                    isActive(link.path)
-                      ? "text-blue-700 font-semibold"
-                      : scrolled
-                      ? "text-gray-700 hover:text-blue-700"
-                      : "text-blue-900 hover:text-blue-700"
-                  }`}
-                >
-                  {link.name}
-                  {isActive(link.path) && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full"></div>
-                  )}
-                </Link>
-              </div>
-            ))}
+          <div className="hidden lg:flex items-center space-x-5">
+            {navLinks.map((link) => {
+              const active = isSectionActive(link.sectionId);
+              return (
+                <div key={link.name} className="relative">
+                  <a
+                    href={link.path}
+                    onClick={(e) => handleNavClick(link.path, link.sectionId, e)}
+                    className={`relative px-1 py-2 transition-all duration-300 font-medium cursor-pointer ${
+                      active
+                        ? "text-blue-700 font-semibold"
+                        : scrolled
+                        ? "text-gray-700 hover:text-blue-700"
+                        : "text-blue-900 hover:text-blue-700"
+                    }`}
+                  >
+                    {link.name}
+                    {active && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full"></div>
+                    )}
+                  </a>
+                </div>
+              );
+            })}
             
-            <div className="ml-4">
-              <Link
-                to="/contact"
-                className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
-                  scrolled
-                    ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg"
-                    : "bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 text-white shadow-xl"
-                }`}
+            {/* Buttons Container */}
+            <div className="ml-4 flex items-center gap-4">
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick("/", "contact", e)}
+                className="bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 group"
               >
-                Get Quote
-              </Link>
+                <span>Start Project</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="#projects"
+                onClick={(e) => handleNavClick("/", "projects", e)}
+                className="border-2 border-blue-600 hover:border-blue-700 text-blue-700 hover:text-blue-800 px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
+              >
+                <span>View Projects</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
           </div>
 
@@ -116,31 +169,44 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden mt-4 pb-6 space-y-2 animate-slide-in">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`block px-4 py-3 rounded-lg transition-colors duration-300 font-medium ${
-                  isActive(link.path)
-                    ? "text-blue-700 border-l-4 border-blue-600 pl-3 font-semibold"
-                    : scrolled
-                    ? "text-gray-700 hover:text-blue-700 hover:bg-blue-50"
-                    : "text-blue-900 hover:text-blue-700 hover:bg-white/80"
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isSectionActive(link.sectionId);
+              return (
+                <a
+                  key={link.name}
+                  href={link.path}
+                  onClick={(e) => handleNavClick(link.path, link.sectionId, e)}
+                  className={`block px-4 py-3 rounded-lg transition-colors duration-300 font-medium cursor-pointer ${
+                    active
+                      ? "text-blue-700 border-l-4 border-blue-600 pl-3 font-semibold"
+                      : scrolled
+                      ? "text-gray-700 hover:text-blue-700 hover:bg-blue-50"
+                      : "text-blue-900 hover:text-blue-700 hover:bg-white/80"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             
-            <div className="pt-4 mt-4 border-t border-gray-200">
-              <Link
-                to="/contact"
-                className="block w-full text-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-                onClick={() => setIsOpen(false)}
+            {/* Mobile Buttons */}
+            <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick("/", "contact", e)}
+                className="block w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 group"
               >
-                Get a Free Quote
-              </Link>
+                <span>Start Your Project</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="#projects"
+                onClick={(e) => handleNavClick("/", "projects", e)}
+                className="block w-full border-2 border-blue-600 hover:border-blue-700 text-blue-700 hover:text-blue-800 px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
+              >
+                <span>View Projects</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
           </div>
         )}
