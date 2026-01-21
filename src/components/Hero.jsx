@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Award,
   Users,
@@ -59,6 +60,8 @@ const BackgroundImageSlider = () => {
 
 const Hero = () => {
   const [rightColumnIndex, setRightColumnIndex] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Right column items for auto-scrolling
   const rightColumnItems = [
@@ -96,6 +99,32 @@ const Hero = () => {
       description: "Environment-friendly waste recycling plant",
     },
   ];
+
+  // Function to scroll to contact section
+  const scrollToContact = (e, projectTitle = null) => {
+    e.preventDefault();
+    
+    // If we're already on the home page, scroll to contact section
+    if (location.pathname === "/") {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const navbarHeight = 80;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update URL hash
+        window.history.pushState(null, "", "#contact");
+      }
+    } else {
+      // If not on home page, navigate to home with contact hash
+      navigate("/#contact");
+    }
+  };
 
   // Smoother auto-scroll right column
   useEffect(() => {
@@ -273,7 +302,10 @@ const Hero = () => {
                           </p>
                         </div>
 
-                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        <button 
+                          onClick={(e) => scrollToContact(e, item.title)}
+                          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                        >
                           Request Consultation
                         </button>
                       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   FolderKanban,
@@ -6,6 +7,9 @@ import {
 } from "lucide-react";
 
 const Projects = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const projects = [
     {
       title: "50 TPD CPC Plant",
@@ -41,6 +45,32 @@ const Projects = () => {
       category: "Renewable",
     },
   ];
+
+  // Function to scroll to contact section
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    
+    // If we're already on the home page, scroll to contact section
+    if (location.pathname === "/") {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const navbarHeight = 80;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update URL hash
+        window.history.pushState(null, "", "#contact");
+      }
+    } else {
+      // If not on home page, navigate to home with contact hash
+      navigate("/#contact");
+    }
+  };
 
   return (
     <section id="projects" className="relative py-6 md:py-8 lg:py-10 w-full overflow-hidden bg-white">
@@ -94,7 +124,10 @@ const Projects = () => {
                 </div>
               </div>
               <div className="px-6 pb-6">
-                <button className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-800 font-medium text-xs md:text-sm group">
+                <button 
+                  onClick={scrollToContact}
+                  className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-800 font-medium text-xs md:text-sm group"
+                >
                   View Case Study
                   <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -104,7 +137,10 @@ const Projects = () => {
         </div>
 
         <div className="text-center">
-          <button className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+          <button 
+            onClick={scrollToContact}
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 md:px-10 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             <FolderKanban className="w-4 h-4 md:w-5 md:h-5" />
             View All Projects
           </button>

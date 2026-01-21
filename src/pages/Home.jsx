@@ -33,21 +33,23 @@ const Home = () => {
       {/* Projects Section */}
       <Projects />
 
+       {/* Careers Section */}
+      <section id="careers">
+        <Careers />
+      </section>
+
       {/* Contact Section */}
       <section id="contact">
         <Contact />
       </section>
 
-      {/* Careers Section */}
-      <section id="careers">
-        <Careers />
-      </section>
+     
 
       {/* Testimonials Section */}
       <Testimonials />
 
       {/* CTA Section */}
-      <CTA />
+      {/* <CTA /> */}
 
       {/* Footer CTA */}
       <FooterCTA />

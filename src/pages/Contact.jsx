@@ -390,7 +390,7 @@ Please respond with relevant details or attach available documents.`;
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
-                    href="https://wa.me/911234567890"
+                    href="https://wa.me/918100537052"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-4 rounded-xl font-bold text-lg text-center transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-3"
@@ -454,7 +454,7 @@ Please respond with relevant details or attach available documents.`;
                 className="bg-white hover:bg-gray-100 text-blue-700 px-12 py-5 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3 group"
               >
                 <Phone className="w-5 h-5" />
-                <span>Call Now: +91 123 456 7890</span>
+                <span>Call Now: +91 8100537052</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </a>
               <a

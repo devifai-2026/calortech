@@ -51,7 +51,7 @@ const Footer = () => {
     "About Us": "about",
     "Services": "services",
     "Contact": "contact",
-    "Career Links": "contact", 
+    "Career": "contact", 
   };
 
   return (
@@ -134,16 +134,16 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-blue-400" />
                 <span className="text-gray-400 text-sm">
-                  info@calortechengineers.com
+                 dte.info20@gmail.com
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-blue-400" />
-                <span className="text-gray-400 text-sm">+91 XXXXXXXXXX</span>
+                <span className="text-gray-400 text-sm">+91 8100537052</span>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-blue-400" />
-                <span className="text-gray-400 text-sm">India</span>
+                <span className="text-gray-400 text-sm">286 B.B Ganguly street, <br /> 1 St floor, Kolkata 700012</span>
               </li>
             </ul>
             <div className="flex gap-3">
@@ -237,16 +237,16 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-blue-400" />
                 <span className="text-gray-400">
-                  info@calortechengineers.com
+                  dte.info20@gmail.com
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-400">+91 XXXXXXXXXX</span>
+                <span className="text-gray-400">+91 8100537052</span>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-400">India</span>
+                <span className="text-gray-400">286 B.B Ganguly street, <br /> 1 St floor, Kolkata 700012</span>
               </li>
             </ul>
             <div className="flex gap-4 mt-6">
