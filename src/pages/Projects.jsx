@@ -78,7 +78,7 @@ export default function Projects() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50">
+    <div id="projects" className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-blue-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-10 md:py-14">
         <div className="max-w-7xl mx-auto px-4">

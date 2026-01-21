@@ -32,6 +32,16 @@ import {
 const Solutions = () => {
   const [activeTab, setActiveTab] = useState("all");
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      // Optional: Add smooth scrolling behavior
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  };
   const solutions = [
     {
       id: "cpc",
@@ -330,7 +340,7 @@ const Solutions = () => {
                 
                 {/* Action Button */}
                 <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                  <button className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm group">
+                  <button onClick={scrollToContact} className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm group">
                     Learn More
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -348,65 +358,7 @@ const Solutions = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl overflow-hidden shadow-2xl">
-          <div className="p-8 md:p-12">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-bold text-white mb-4">
-                  Need a Custom Solution?
-                </h3>
-                <p className="text-blue-100 text-lg mb-6">
-                  Our engineering team specializes in developing bespoke solutions 
-                  tailored to your specific requirements and challenges.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-blue-100">
-                    <CheckCircle className="w-5 h-5 text-green-300" />
-                    <span>Free Consultation & Analysis</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-blue-100">
-                    <CheckCircle className="w-5 h-5 text-green-300" />
-                    <span>Feasibility Study & ROI Analysis</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-blue-100">
-                    <CheckCircle className="w-5 h-5 text-green-300" />
-                    <span>End-to-End Project Management</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <h4 className="text-xl font-bold text-white mb-4">Request a Quote</h4>
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
-                  />
-                  <select className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-white/40">
-                    <option value="" className="text-gray-700">Select Solution</option>
-                    {solutions.map(sol => (
-                      <option key={sol.id} value={sol.id} className="text-gray-700">{sol.title}</option>
-                    ))}
-                  </select>
-                  <button
-                    type="submit"
-                    className="w-full bg-white text-blue-700 hover:bg-gray-100 py-3 rounded-lg font-bold transition-colors duration-300"
-                  >
-                    Get Free Consultation
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    
         {/* Process Overview */}
         <div className="mt-20">
           <div className="text-center mb-12">
