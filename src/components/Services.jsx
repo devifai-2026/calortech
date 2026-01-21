@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   CheckCircle,
@@ -18,10 +18,13 @@ import {
   GitBranch,
   HardHat,
 } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Services = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const slides = [
     {
@@ -80,6 +83,32 @@ const Services = () => {
     { name: "Fabrication Support", icon: <Wrench /> },
     { name: "Commissioning", icon: <GitBranch /> },
   ];
+
+  // Function to scroll to contact section
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    
+    // If we're already on the home page, scroll to contact section
+    if (location.pathname === "/") {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const navbarHeight = 80;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update URL hash
+        window.history.pushState(null, "", "#contact");
+      }
+    } else {
+      // If not on home page, navigate to home with contact hash
+      navigate("/#contact");
+    }
+  };
 
   // Auto-slide functionality
   useEffect(() => {
@@ -158,7 +187,10 @@ const Services = () => {
                           <p className="text-blue-100 text-base md:text-lg mb-8 leading-relaxed">
                             {slide.description}
                           </p>
-                          <button className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                          <button 
+                            onClick={scrollToContact}
+                            className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                          >
                             Learn More
                             <ArrowRight className="w-4 h-4" />
                           </button>
@@ -248,9 +280,12 @@ const Services = () => {
                     <h3 className="font-bold text-gray-900 text-sm md:text-base">
                       {service.name}
                     </h3>
-                    <p className="text-xs md:text-sm text-gray-500 mt-1">
+                    <button 
+                      onClick={scrollToContact}
+                      className="text-xs md:text-sm text-gray-500 mt-1 hover:text-blue-700 transition-colors"
+                    >
                       Learn more →
-                    </p>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -258,7 +293,10 @@ const Services = () => {
           </div>
 
           <div className="text-center">
-            <button className="inline-flex items-center gap-3 text-blue-700 hover:text-blue-800 font-semibold text-lg group transition-all duration-300">
+            <button 
+              onClick={scrollToContact}
+              className="inline-flex items-center gap-3 text-blue-700 hover:text-blue-800 font-semibold text-lg group transition-all duration-300"
+            >
               <span>Explore All Services</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </button>
