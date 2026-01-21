@@ -16,6 +16,11 @@ const Home = () => {
       {/* Hero Section */}
       <Hero />
 
+      {/* Solutions Section */}
+      <section id="solutions">
+        <Solutions />
+      </section>
+
       {/* Services Section */}
       <Services />
 
@@ -28,23 +33,18 @@ const Home = () => {
       {/* Projects Section */}
       <Projects />
 
-      {/* Testimonials Section */}
-      <Testimonials />
+      {/* Contact Section */}
+      <section id="contact">
+        <Contact />
+      </section>
 
       {/* Careers Section */}
       <section id="careers">
         <Careers />
       </section>
 
-      {/* Solutions Section */}
-      <section id="solutions">
-        <Solutions />
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact">
-        <Contact />
-      </section>
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* CTA Section */}
       <CTA />
