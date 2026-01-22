@@ -191,7 +191,7 @@ const Navbar = () => {
             className={`lg:hidden p-2 rounded-lg transition-colors duration-300 ${
               scrolled 
                 ? "text-gray-700 hover:bg-gray-100" 
-                : "text-blue-900 hover:bg-white/80"
+                : "text-white hover:bg-white/20"
             }`}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -200,45 +200,45 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden mt-4 pb-6 space-y-2 animate-slide-in">
-            {navLinks.map((link) => {
-              const active = isSectionActive(link.sectionId);
-              return (
+          <div className="lg:hidden mt-4 pb-6 animate-slide-in bg-white rounded-xl shadow-2xl border border-gray-100">
+            <div className="space-y-2 p-4">
+              {navLinks.map((link) => {
+                const active = isSectionActive(link.sectionId);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.path}
+                    onClick={(e) => handleNavClick(link.path, link.sectionId, e)}
+                    className={`block px-4 py-3 rounded-lg transition-all duration-300 font-medium cursor-pointer ${
+                      active
+                        ? "text-blue-700 bg-blue-50 border-l-4 border-blue-600 pl-3 font-semibold"
+                        : "text-gray-700 hover:text-blue-700 hover:bg-blue-50"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+              
+              {/* Mobile Buttons */}
+              <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
                 <a
-                  key={link.name}
-                  href={link.path}
-                  onClick={(e) => handleNavClick(link.path, link.sectionId, e)}
-                  className={`block px-4 py-3 rounded-lg transition-colors duration-300 font-medium cursor-pointer ${
-                    active
-                      ? "text-blue-700 border-l-4 border-blue-600 pl-3 font-semibold"
-                      : scrolled
-                      ? "text-gray-700 hover:text-blue-700 hover:bg-blue-50"
-                      : "text-blue-900 hover:text-blue-700 hover:bg-white/80"
-                  }`}
+                  href="#contact"
+                  onClick={(e) => handleNavClick("/", "contact", e)}
+                  className="block w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 group"
                 >
-                  {link.name}
+                  <span>Start Your Project</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
-              );
-            })}
-            
-            {/* Mobile Buttons */}
-            <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick("/", "contact", e)}
-                className="block w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 group"
-              >
-                <span>Start Your Project</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#projects"
-                onClick={(e) => handleNavClick("/", "projects", e)}
-                className="block w-full border-2 border-blue-600 hover:border-blue-700 text-blue-700 hover:text-blue-800 px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
-              >
-                <span>View Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+                <a
+                  href="#projects"
+                  onClick={(e) => handleNavClick("/", "projects", e)}
+                  className="block w-full border-2 border-blue-600 hover:border-blue-700 text-blue-700 hover:text-blue-800 px-2 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
+                >
+                  <span>View Projects</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
           </div>
         )}
