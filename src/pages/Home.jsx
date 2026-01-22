@@ -12,7 +12,7 @@ import Contact from "./Contact";
 
 const Home = () => {
   return (
-    <div className="flex flex-col min-h-screen pt-6 lg:pt-0">
+    <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <Hero />
 
