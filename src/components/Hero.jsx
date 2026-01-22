@@ -150,7 +150,7 @@ const Hero = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-stretch w-full">
             <div className="text-left w-full flex flex-col justify-between">
               <div>
-                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full mb-6 shadow-lg">
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full mb-6 shadow-lg mt-2 ">
                   <Sparkles className="w-5 h-5" />
                   <span className="text-sm font-semibold">
                     Engineering Excellence Since 2020
