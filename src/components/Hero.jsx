@@ -1,78 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  Award,
-  Users,
-  Globe,
-  Clock,
-  Sparkles,
-  TrendingUp,
-} from "lucide-react";
-import one from "../assets/Home/one.jpg";
-import two from "../assets/Home/two.jpg";
-import three from "../assets/Home/three.jpg";
-import four from "../assets/Home/four.jpg";
-
-// Background Image Slider Component for Hero Section using local images
-const BackgroundImageSlider = () => {
-  const [currentImage, setCurrentImage] = useState(0);
-
-  // Use local images from assets
-  const images = [
-    one,
-    two,
-    three,
-    four
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
-            index === currentImage
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
-          }`}
-          style={{
-            backgroundImage: `url('${image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-            backgroundRepeat: "no-repeat",
-            filter: "brightness(0.7) contrast(1.1)",
-          }}
-        />
-      ))}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-gray-800/50 to-blue-900/40" />
-    </div>
-  );
-};
+import { ChevronRight, ChevronLeft } from "lucide-react";
+import one from "../assets/Hero/one.jpg";
+import two from "../assets/Hero/two.jpg";
+import three from "../assets/Hero/three.jpg";
+import four from "../assets/Hero/four.jpg";
+import five from "../assets/Hero/five.jpg";
+import six from "../assets/Hero/six.jpg";
 
 const Hero = () => {
-  const [rightColumnIndex, setRightColumnIndex] = useState(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [activeImage, setActiveImage] = useState(one); // Default image
+  const [isHovering, setIsHovering] = useState(false); // Track if hovering
   const navigate = useNavigate();
   const location = useLocation();
+  const containerRef = useRef(null);
 
-  // Right column items for auto-scrolling
-  const rightColumnItems = [
+  const projectItems = [
     {
       title: "50 TPD CPC Plant",
       location: "Gujarat, India",
       duration: "12 Months",
       status: "Completed",
       category: "CPC Plants",
-      description:
-        "Complete engineering and commissioning of calcination plant",
+      description: "Complete engineering and commissioning of calcination plant",
+      image: one,
     },
     {
       title: "Waste Heat Recovery System",
@@ -81,6 +33,7 @@ const Hero = () => {
       status: "Ongoing",
       category: "Energy Recovery",
       description: "Design and installation of WHRB for cement plant",
+      image: two,
     },
     {
       title: "Industrial Paste Plant",
@@ -89,6 +42,7 @@ const Hero = () => {
       status: "Completed",
       category: "Paste Plants",
       description: "Turnkey paste plant with automation",
+      image: three,
     },
     {
       title: "Tyre Pyrolysis Unit",
@@ -97,262 +51,286 @@ const Hero = () => {
       status: "Completed",
       category: "Renewable",
       description: "Environment-friendly waste recycling plant",
+      image: four,
+    },
+    {
+      title: "Biomass Gasification Plant",
+      location: "Punjab, India",
+      duration: "14 Months",
+      status: "Ongoing",
+      category: "Renewable Energy",
+      description: "Sustainable energy generation from agricultural waste",
+      image: five,
+    },
+    {
+      title: "Cement Grinding Unit",
+      location: "Rajasthan, India",
+      duration: "18 Months",
+      status: "Completed",
+      category: "Cement Plants",
+      description: "State-of-the-art grinding and packing facility",
+      image: six,
     },
   ];
 
-  // Function to scroll to contact section
-  const scrollToContact = (e, projectTitle = null) => {
+  const stats = [
+    {
+      value: "100+",
+      label: "Projects Delivered",
+      sublabel: "Across 15+ Countries",
+    },
+    { value: "50+", label: "Happy Clients", sublabel: "95% Retention Rate" },
+    { value: "15+", label: "Countries Served", sublabel: "Global Presence" },
+    { value: "24/7", label: "Support", sublabel: "Always Available" },
+  ];
+
+  // Group projects into sets of 3 for each slide
+  const groupedProjects = [];
+  for (let i = 0; i < projectItems.length; i += 3) {
+    groupedProjects.push(projectItems.slice(i, i + 3));
+  }
+
+  const scrollToContact = (e) => {
     e.preventDefault();
-    
-    // If we're already on the home page, scroll to contact section
     if (location.pathname === "/") {
       const contactSection = document.getElementById("contact");
       if (contactSection) {
         const navbarHeight = 80;
         const elementPosition = contactSection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-        
-        // Update URL hash
+        const offsetPosition =
+          elementPosition + window.pageYOffset - navbarHeight;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         window.history.pushState(null, "", "#contact");
       }
     } else {
-      // If not on home page, navigate to home with contact hash
       navigate("/#contact");
     }
   };
 
-  // Smoother auto-scroll right column
+  const nextSlide = () => {
+    setCarouselIndex((prev) => (prev + 1) % groupedProjects.length);
+  };
+
+  const prevSlide = () => {
+    setCarouselIndex(
+      (prev) => (prev - 1 + groupedProjects.length) % groupedProjects.length
+    );
+  };
+
+  // Handle project card mouse enter
+  const handleProjectMouseEnter = (projectImage) => {
+    setIsHovering(true);
+    setActiveImage(projectImage);
+  };
+
+  // Handle project card mouse leave - reset to default
+  const handleProjectMouseLeave = () => {
+    setIsHovering(false);
+    setActiveImage(one); // Reset to default image
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setRightColumnIndex((prev) => (prev + 1) % rightColumnItems.length);
+      nextSlide();
     }, 5000);
     return () => clearInterval(interval);
-  }, [rightColumnItems.length]);
+  }, []);
 
   return (
     <section
       id="hero"
-      className="relative text-white py-16 md:py-24 overflow-hidden w-full min-h-screen flex items-center"
+      className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden"
+      style={{ maxWidth: "100vw", overflowX: "hidden" }}
     >
-      {/* Background Image Slider */}
-      <BackgroundImageSlider />
+      {/* Background with gradient overlay - Dynamic based on activeImage */}
+      <div
+        className="absolute inset-0 z-0 transition-all duration-700 ease-in-out"
+        style={{
+          backgroundImage: `url('${activeImage}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60"></div>
+      </div>
 
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30 z-0"></div>
+      {/* Main Hero Content */}
+      <div className="relative z-10 flex-1 flex items-center justify-center px-4 py-20">
+        <div className="w-full max-w-4xl text-center">
+          {/* Tagline */}
+          <div className="mb-6 inline-block">
+            <span className="text-sm md:text-base font-semibold text-blue-300 tracking-widest uppercase">
+              ✨ Engineering Excellence Since 15 Years
+            </span>
+          </div>
 
-      <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch w-full">
-            <div className="text-left w-full flex flex-col justify-between">
-              <div>
-                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full mb-6 shadow-lg mt-2 ">
-                  <Sparkles className="w-5 h-5" />
-                  <span className="text-sm font-semibold">
-                    Engineering Excellence Since 2020
-                  </span>
-                </div>
+          {/* Main Headline */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight text-white drop-shadow-2xl uppercase">
+            Engineering
+            <span className="mx-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-200 to-cyan-200">
+              To
+            </span>
+            <br />
+            Execution.
+          </h1>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                  Precision
-                  <span className="text-white block">Engineering</span>
-                  <span className="text-blue-100 text-3xl md:text-4xl block mt-2">
-                    For Industrial Excellence
-                  </span>
-                </h1>
-                <p className="text-lg md:text-xl text-blue-50 mb-5 leading-relaxed">
-                  Complete engineering solutions from concept to
-                  commissioning. We bridge the gap between design and
-                  execution for process and energy-intensive industries with
-                  cutting-edge technology and expertise.
-                </p>
-              </div>
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto mb-6 leading-relaxed">
+            Complete engineering solutions from concept to commissioning. We
+            bridge the gap between design and execution for process and
+            energy-intensive industries with cutting-edge technology and
+            expertise.
+          </p>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-3 md:mt-4 w-full">
-                <div className="bg-white/95 backdrop-blur-sm p-4 md:p-5 rounded-xl shadow-lg border border-white/20 text-center transform hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                  <div className="inline-flex items-center justify-center bg-blue-100 rounded-full mb-3 md:mb-4">
-                    <Award className="w-3 h-3 md:w-4 md:h-4 text-blue-600" />
-                  </div>
-                  <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">
-                    100+
-                  </div>
-                  <div className="text-gray-600 font-semibold text-xs md:text-sm text-nowrap">
-                    Projects Delivered
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 text-nowrap">
-                    Across 15+ Countries
-                  </div>
-                </div>
+          {/* CTA Button */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={scrollToContact}
+              className="group relative inline-flex items-center gap-2 px-8 md:px-12 py-4 backdrop-blur-sm hover:bg-white/10 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl border border-blue-600/70"
+            >
+              Discover More
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+      </div>
 
-                <div className="bg-white/95 backdrop-blur-sm p-4 md:p-5 rounded-xl shadow-lg border border-white/20 text-center transform hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                  <div className="inline-flex items-center justify-center bg-green-100 rounded-full mb-3 md:mb-4">
-                    <Users className="w-3 h-3 md:w-4 md:h-4 text-green-600" />
-                  </div>
-                  <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">
-                    50+
-                  </div>
-                  <div className="text-gray-600 font-semibold text-xs md:text-sm text-nowrap">
-                    Happy Clients
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 text-nowrap">
-                    95% Retention Rate
-                  </div>
-                </div>
-
-                <div className="bg-white/95 backdrop-blur-sm p-4 md:p-5 rounded-xl shadow-lg border border-white/20 text-center transform hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                  <div className="inline-flex items-center justify-center bg-purple-100 rounded-full mb-3 md:mb-4">
-                    <Globe className="w-3 h-3 md:w-4 md:h-4 text-purple-600" />
-                  </div>
-                  <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">
-                    15+
-                  </div>
-                  <div className="text-gray-600 font-semibold text-xs md:text-sm text-nowrap">
-                    Countries Served
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 text-nowrap">
-                    Global Presence
-                  </div>
-                </div>
-
-                <div className="bg-white/95 backdrop-blur-sm p-4 md:p-5 rounded-xl shadow-lg border border-white/20 text-center transform hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-center justify-center">
-                  <div className="inline-flex items-center justify-center bg-amber-100 rounded-full mb-3 md:mb-4">
-                    <Clock className="w-3 h-3 md:w-4 md:h-4 text-amber-600" />
-                  </div>
-                  <div className="text-lg md:text-xl font-bold text-gray-900 mb-1">
-                    24/7
-                  </div>
-                  <div className="text-gray-600 font-semibold text-xs md:text-sm text-nowrap">
-                    Support
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 text-nowrap">
-                    Always Available
-                  </div>
-                </div>
-              </div>
+      {/* Latest Projects Section */}
+      <div className="relative z-10 px-4 py-12 md:py-6 md:pt-16 flex justify-end">
+        <div className="max-w-2xl mx-0 w-full">
+          {/* Section Card - Fixed parent container */}
+          <div className="bg-white/65 rounded-3xl shadow-2xl p-8 md:p-6">
+            {/* Section Title */}
+            <div className="text-center mb-3">
+              <h2 className="text-lg md:text-xl font-bold text-gray-800 uppercase tracking-widest">
+                Latest Projects
+              </h2>
             </div>
 
-            <div className="relative w-full h-full flex items-stretch">
-              <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 w-full h-full flex flex-col">
-                <div className="mb-3">
-                  <h3 className="text-lg md:text-xl font-bold text-blue-600 mb-2">
-                    Latest Projects
-                  </h3>
-                </div>
-
-                <div className="relative h-[400px] overflow-hidden">
-                  {rightColumnItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-all duration-700 ease-out ${
-                        index === rightColumnIndex
-                          ? "opacity-100 translate-y-0 scale-100"
-                          : "opacity-0 translate-y-8 scale-95"
-                      }`}
-                    >
-                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 border-b pb-2 border-gray-200">
-                        {item.title}
-                      </h2>
-
-                      <div className="space-y-2 mb-8">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1">
-                            <p className="text-base font-bold text-gray-700">
-                              Location
-                            </p>
-                            <p className="text-xs text-gray-600">
-                              {item.location}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-blue-700 bg-blue-50 rounded-3xl py-1.5 px-3 font-bold text-sm border border-blue-100">
-                              {item.category}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <p className="text-base font-bold text-gray-700">
-                            Duration
-                          </p>
-                          <p className="text-xs text-gray-600">
-                            {item.duration}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <p className="text-base font-bold text-gray-700">
-                            Status
-                          </p>
-                          <p className="text-xs text-gray-600">
-                            {item.status}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="mb-4">
-                        <div className="bg-blue-50/80 rounded-2xl p-6 mb-6">
-                          <h4 className="text-lg font-bold text-gray-900 mb-3">
-                            Project Overview
-                          </h4>
-                          <p className="text-gray-700 leading-relaxed text-sm">
-                            {item.description}
-                          </p>
-                        </div>
-
-                        <button 
-                          onClick={(e) => scrollToContact(e, item.title)}
-                          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+            {/* Child Cards Container - This is what slides */}
+            <div className="relative overflow-hidden">
+              {/* Slides Wrapper for child cards only */}
+              <div
+                className="flex transition-transform duration-700 ease-out"
+                style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+              >
+                {groupedProjects.map((projectsGroup, groupIndex) => (
+                  <div key={groupIndex} className="flex-shrink-0 w-full">
+                    {/* Three Projects Grid */}
+                    <div className="grid grid-cols-3 gap-4 md:gap-6 px-1">
+                      {projectsGroup.map((project, index) => (
+                        <div
+                          key={index}
+                          className="group cursor-pointer transition-all duration-300 hover:scale-105"
+                          onMouseEnter={() => handleProjectMouseEnter(project.image)}
+                          onMouseLeave={handleProjectMouseLeave}
                         >
-                          Request Consultation
-                        </button>
-                      </div>
+                          {/* Image Container */}
+                          <div className="relative rounded-2xl overflow-hidden h-16 md:h-20 lg:h-24 shadow-lg hover:shadow-xl transition-all bg-gray-300">
+                            <div
+                              className="absolute inset-0 w-full h-full"
+                              style={{
+                                backgroundImage: `url('${project.image}')`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                              }}
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                            </div>
+                          </div>
+
+                          {/* Info Container */}
+                          <div className="pt-4 px-1">
+                            {/* Title */}
+                            <h3 className="text-xs md:text-sm font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                              {project.title}
+                            </h3>
+
+                            {/* Details */}
+                            <div className="text-xs md:text-xs text-gray-600 space-y-0.5">
+                              <p className="font-semibold">
+                                {project.location}
+                              <span
+                                className={`font-semibold pl-2.5 ${
+                                  project.status === "Ongoing"
+                                    ? "text-yellow-600"
+                                    : "text-green-600"
+                                }`}
+                              >
+                                {project.status}
+                              </span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-
-                {/* Navigation dots for right column */}
-                <div className="flex justify-center gap-2 mt-4">
-                  {rightColumnItems.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setRightColumnIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === rightColumnIndex
-                          ? "bg-blue-600 w-6"
-                          : "bg-gray-300 hover:bg-gray-400"
-                      }`}
-                    />
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
 
-              <div className="absolute -top-6 -left-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg hidden md:block animate-pulse-slow">
-                <Award className="w-8 h-8 text-yellow-500" />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg hidden md:block animate-pulse-slow">
-                <TrendingUp className="w-8 h-8 text-green-500" />
-              </div>
+           
+            </div>
+
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-3">
+              {groupedProjects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCarouselIndex(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    index === carouselIndex
+                      ? "bg-gray-700 w-8"
+                      : "bg-gray-400 w-2.5 hover:bg-gray-500"
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
       </div>
 
+      {/* CSS for animations */}
       <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 1;
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
           }
-          50% {
-            opacity: 0.8;
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
 
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
+        @keyframes slideInFromRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out;
+        }
+
+        .animate-slideIn {
+          animation: slideInFromRight 0.8s ease-out;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>

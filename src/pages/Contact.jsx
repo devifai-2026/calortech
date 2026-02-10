@@ -110,7 +110,7 @@ Please respond with relevant details or attach available documents.`;
     {
       icon: <Phone className="w-8 h-8" />,
       title: "Phone Support",
-      content: "+91 123 456 7890",
+      content: "+91 8100537052",
       secondary: "Available Mon-Sat, 9AM-7PM",
       color: "from-blue-600 to-blue-800",
       bg: "bg-gradient-to-br from-blue-50 to-blue-100"
@@ -344,7 +344,7 @@ Please respond with relevant details or attach available documents.`;
               </div>
 
               {/* Questionnaire Section */}
-              <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl fade-in">
+              {/* <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl fade-in">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-14 h-14 bg-gradient-to-br from-amber-600 to-amber-800 rounded-xl flex items-center justify-center">
                     <FileText className="w-7 h-7 text-white" />
@@ -406,7 +406,7 @@ Please respond with relevant details or attach available documents.`;
                     <span>Send via Email</span>
                   </a>
                 </div>
-              </div>
+              </div> */}
 
               {/* Benefits */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
