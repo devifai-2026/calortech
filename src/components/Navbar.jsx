@@ -122,19 +122,19 @@ const Navbar = () => {
               <div className="text-white font-bold text-xl">CT</div>
             </div>
             <div>
-              <h1 className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
+              <h1 className={`text-base font-bold tracking-tight transition-colors duration-300 ${
                 scrolled ? "text-blue-700" : "text-white"
               }`}>
-                Calor Tech Engineers
+               CALOR TECH ENGINEERS LLP
               </h1>
-              <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-blue-600" />
                 <p className={`text-xs font-semibold italic tracking-wider transition-colors duration-300 ${
                   scrolled ? "text-blue-700" : "text-blue-600"
                 }`}>
                   Engineering To Execution
                 </p>
-              </div>
+              </div> */}
             </div>
           </Link>
 
