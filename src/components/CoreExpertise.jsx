@@ -9,6 +9,7 @@ import {
   Clock,
   DollarSign,
   Leaf,
+  Boxes,
 } from "lucide-react";
 
 const CoreExpertise = () => {
@@ -87,6 +88,17 @@ const CoreExpertise = () => {
         "Carbon Footprint",
         "Green Technology",
         "Environmental Compliance",
+      ],
+    },
+    {
+      icon: <Boxes className="w-10 h-10" />,
+      title: "Material Handling",
+      description:
+        "Efficient material handling systems designed for seamless industrial operations and logistics",
+      features: [
+        "Conveyor Systems",
+        "Storage Solutions",
+        "Logistics Planning",
       ],
     },
   ];

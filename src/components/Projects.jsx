@@ -13,24 +13,23 @@ const Projects = () => {
   const projects = [
     {
       title: "50 TPD CPC Plant",
-      location: "Gujarat, India",
+      location: "Baruni, India",
       duration: "12 Months",
-      description:
-        "Complete engineering and commissioning of calcination plant",
+      description: "Complete engineering and commissioning of calcination plant",
       status: "Completed",
       category: "CPC Plants",
     },
     {
       title: "Waste Heat Recovery System",
-      location: "Maharashtra, India",
+      location: "Baruni / Guwahati / West Bengal",
       duration: "8 Months",
-      description: "Design and installation of WHRB for cement plant",
-      status: "Ongoing",
+      description: "Design and installation of WHRB for industrial plants",
+      status: "Completed",
       category: "Energy Recovery",
     },
     {
       title: "Industrial Paste Plant",
-      location: "Tamil Nadu, India",
+      location: "India",
       duration: "10 Months",
       description: "Turnkey paste plant with automation",
       status: "Completed",
@@ -38,13 +37,30 @@ const Projects = () => {
     },
     {
       title: "Tyre Pyrolysis Unit",
-      location: "Karnataka, India",
-      duration: "6 Months",
+      location: "India",
+      duration: "–",
       description: "Environment-friendly waste recycling plant",
-      status: "Completed",
+      status: "Upcoming",
       category: "Renewable",
     },
+    {
+      title: "Material Handling",
+      location: "West Bengal / Bihar / Jharkhand / MP",
+      duration: "–",
+      description: "Integrated material handling systems across multiple sites",
+      status: "Completed",
+      category: "Material Handling",
+    },
+    {
+      title: "Food Processing Plant",
+      location: "Agartala, India",
+      duration: "–",
+      description: "End-to-end food processing plant engineering and setup",
+      status: "Completed",
+      category: "Food Processing",
+    },
   ];
+
 
   // Function to scroll to contact section
   const scrollToContact = (e) => {
@@ -84,7 +100,7 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
           {projects.map((project, index) => (
             <div
               key={index}
@@ -96,6 +112,8 @@ const Projects = () => {
                     className={`px-3 py-1 rounded-full text-xs md:text-sm font-semibold ${
                       project.status === "Completed"
                         ? "bg-green-100 text-green-800"
+                        : project.status === "Upcoming"
+                        ? "bg-amber-100 text-amber-800"
                         : "bg-blue-100 text-blue-800"
                     }`}
                   >

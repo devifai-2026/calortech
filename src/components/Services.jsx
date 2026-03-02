@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   ArrowRight,
   CheckCircle,
@@ -6,7 +6,6 @@ import {
   Factory,
   Wrench,
   Zap,
-  ChevronLeft,
   ChevronRight,
   Sparkles,
   Thermometer,
@@ -16,55 +15,90 @@ import {
   Building,
   Package,
   GitBranch,
-  HardHat,
+  Boxes,
+  UtensilsCrossed,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Services = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [hoveredCard, setHoveredCard] = useState(null);
 
-  const slides = [
+  const specializedSolutions = [
     {
+      id: "cpc",
       title: "CPC Plants",
       description:
         "Calcination system engineering, flue gas handling, dust control, heat recovery integration, and execution-ready documentation.",
-      tags: ["Thermal", "Process", "Structures"],
-      icon: <Factory className="w-10 h-10" />,
+      icon: <Factory className="w-8 h-8" />,
+      category: "Thermal Processing",
+      features: [
+        "Calcination System Design",
+        "Flue Gas Handling",
+        "Heat Recovery Integration",
+      ],
+      stats: { projects: 5, efficiency: "95%", capacity: "50-200 TPD" },
       color: "from-blue-600 to-blue-800",
     },
     {
+      id: "eca",
       title: "ECA Plants",
       description:
         "Furnace and utilities engineering including cooling systems, off-gas ducting, auxiliaries, and plant execution support.",
-      tags: ["High Temperature", "Utilities", "Reliability"],
-      icon: <Zap className="w-10 h-10" />,
+      icon: <Zap className="w-8 h-8" />,
+      category: "High Temperature",
+      features: [
+        "Furnace Engineering",
+        "Cooling Systems",
+        "Off-gas Ducting",
+      ],
+      stats: { projects: 1, efficiency: "92%", capacity: "Custom" },
       color: "from-indigo-600 to-indigo-800",
     },
     {
+      id: "paste",
       title: "Paste Plants",
       description:
         "Batching, mixing/heating integration, TFH interface, material handling coordination, and constructible layouts.",
-      tags: ["Paste Plant", "TFH", "Integration"],
-      icon: <Cog className="w-10 h-10" />,
+      icon: <Cog className="w-8 h-8" />,
+      category: "Processing",
+      features: [
+        "Batching Systems",
+        "Mixing Integration",
+        "TFH Interface",
+      ],
+      stats: { projects: 10, efficiency: "98%", accuracy: "99.5%" },
       color: "from-emerald-600 to-emerald-800",
     },
     {
-      title: "WHRB / HRU",
+      id: "whrb",
+      title: "WHRB / HRU Systems",
       description:
         "Waste heat recovery integration with ducting, dampers, stacks, expansion joints, and thermal fluid/steam integration support.",
-      tags: ["Energy Recovery", "Ducting", "Performance"],
-      icon: <Wrench className="w-10 h-10" />,
+      icon: <Wrench className="w-8 h-8" />,
+      category: "Energy Recovery",
+      features: [
+        "Heat Recovery Design",
+        "Ducting Systems",
+        "Expansion Joints",
+      ],
+      stats: { projects: 5, efficiency: "85%", savings: "Up to 30%" },
       color: "from-amber-600 to-amber-800",
     },
     {
+      id: "pyrolysis",
       title: "Tyre Pyrolysis",
       description:
         "Complete pyrolysis plant design including reactor systems, oil condensation, gas cleaning, and carbon black handling.",
-      tags: ["Renewable", "Pyrolysis", "Recycling"],
-      icon: <FlaskRound className="w-10 h-10" />,
+      icon: <FlaskRound className="w-8 h-8" />,
+      category: "Renewable",
+      features: [
+        "Reactor Design",
+        "Oil Condensation",
+        "Gas Cleaning",
+      ],
+      stats: { projects: "Upcoming", efficiency: "--", capacity: "50–100 TPD" },
       color: "from-purple-600 to-purple-800",
     },
   ];
@@ -80,64 +114,35 @@ const Services = () => {
     { name: "Industrial Structures", icon: <Building /> },
     { name: "Energy Systems", icon: <Battery /> },
     { name: "Process Optimization", icon: <Settings /> },
-    { name: "Fabrication Support", icon: <Wrench /> },
+    { name: "Detail Engineering", icon: <Wrench /> },
     { name: "Commissioning", icon: <GitBranch /> },
+    { name: "Material Handling", icon: <Boxes /> },
+    { name: "Food Processing", icon: <UtensilsCrossed /> },
   ];
 
   // Function to scroll to contact section
   const scrollToContact = (e) => {
-    e.preventDefault();
-    
-    // If we're already on the home page, scroll to contact section
+    if (e) e.preventDefault();
+
     if (location.pathname === "/") {
       const contactSection = document.getElementById("contact");
       if (contactSection) {
         const navbarHeight = 80;
         const elementPosition = contactSection.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-        
-        // Update URL hash
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         window.history.pushState(null, "", "#contact");
       }
     } else {
-      // If not on home page, navigate to home with contact hash
       navigate("/#contact");
     }
   };
 
-  // Auto-slide functionality
-  useEffect(() => {
-    let interval;
-    if (!isPaused) {
-      interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 6000);
-    }
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [isPaused, slides.length]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
     <>
-      {/* Services Slider */}
+      {/* Our Specialized Solutions – Card Grid */}
       <section id="services" className="relative py-16 w-full overflow-hidden bg-white">
-        <div className="container mx-auto px-4 relative z-10 w-full">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Our Specialized Solutions
@@ -147,109 +152,73 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto relative w-full">
-            <div
-              className="relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-500 w-full"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {specializedSolutions.map((solution, index) => (
               <div
-                className="flex transition-all duration-700 ease-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                key={solution.id}
+                className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                {slides.map((slide, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
-                    <div
-                      className={`bg-gradient-to-r ${slide.color} text-white p-8 md:p-12`}
-                    >
-                      <div className="grid lg:grid-cols-2 gap-8 items-center">
-                        <div>
-                          <div className="flex items-center gap-4 md:gap-6 mb-8">
-                            <div className="p-4 bg-white/20 rounded-2xl">
-                              {slide.icon}
-                            </div>
-                            <div>
-                              <h3 className="text-2xl md:text-3xl font-bold">
-                                {slide.title}
-                              </h3>
-                              <div className="flex flex-wrap gap-2 mt-2">
-                                {slide.tags.map((tag, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="px-3 py-1 bg-white/20 rounded-full text-xs md:text-sm font-medium"
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                          <p className="text-blue-100 text-base md:text-lg mb-8 leading-relaxed">
-                            {slide.description}
-                          </p>
-                          <button 
-                            onClick={scrollToContact}
-                            className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                          >
-                            Learn More
-                            <ArrowRight className="w-4 h-4" />
-                          </button>
-                        </div>
-                        <div>
-                          <div className="bg-white/10 rounded-2xl p-6">
-                            <h4 className="text-xl font-bold mb-4">
-                              Key Features
-                            </h4>
-                            <ul className="space-y-3">
-                              <li className="flex items-center gap-3">
-                                <CheckCircle className="w-5 h-5 text-green-300" />
-                                <span>Advanced Design Methodology</span>
-                              </li>
-                              <li className="flex items-center gap-3">
-                                <CheckCircle className="w-5 h-5 text-green-300" />
-                                <span>Quality Assurance</span>
-                              </li>
-                              <li className="flex items-center gap-3">
-                                <CheckCircle className="w-5 h-5 text-green-300" />
-                                <span>Timely Delivery</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
+                {/* Gradient top bar */}
+                <div className={`h-2 bg-gradient-to-r ${solution.color}`}></div>
+
+                <div className="p-6">
+                  {/* Icon and Category */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${solution.color} text-white`}>
+                      {solution.icon}
+                    </div>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">
+                      {solution.category}
+                    </span>
+                  </div>
+
+                  {/* Title and Description */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{solution.title}</h3>
+                  <p className="text-gray-600 mb-6">{solution.description}</p>
+
+                  {/* Features */}
+                  <div className="space-y-3 mb-8">
+                    {solution.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        <span className="text-sm text-gray-700">{feature}</span>
                       </div>
+                    ))}
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-4 mb-6">
+                    {Object.entries(solution.stats).map(([key, value], idx) => (
+                      <div key={idx} className="text-center">
+                        <div className="text-lg font-bold text-gray-900">{value}</div>
+                        <div className="text-xs text-gray-500 capitalize">{key}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Action Footer */}
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                    <button
+                      onClick={scrollToContact}
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm group"
+                    >
+                      Learn More
+                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                    <div className="text-xs text-gray-400">
+                      {index + 1}/{specializedSolutions.length}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            <div className="flex justify-center gap-4 mt-8">
-              <button
-                onClick={prevSlide}
-                className="p-3 bg-white hover:bg-gray-100 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl"
-              >
-                <ChevronLeft className="w-6 h-6 text-gray-700" />
-              </button>
-              <div className="flex items-center gap-3">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentSlide
-                        ? "bg-blue-700 w-8 md:w-10"
-                        : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                  />
-                ))}
+                {/* Hover overlay */}
+                {hoveredCard === index && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent pointer-events-none"></div>
+                )}
               </div>
-              <button
-                onClick={nextSlide}
-                className="p-3 bg-white hover:bg-gray-100 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 hover:shadow-xl"
-              >
-                <ChevronRight className="w-6 h-6 text-gray-700" />
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -280,7 +249,7 @@ const Services = () => {
                     <h3 className="font-bold text-gray-900 text-sm md:text-base">
                       {service.name}
                     </h3>
-                    <button 
+                    <button
                       onClick={scrollToContact}
                       className="text-xs md:text-sm text-gray-500 mt-1 hover:text-blue-700 transition-colors"
                     >
@@ -293,7 +262,7 @@ const Services = () => {
           </div>
 
           <div className="text-center">
-            <button 
+            <button
               onClick={scrollToContact}
               className="inline-flex items-center gap-3 text-blue-700 hover:text-blue-800 font-semibold text-lg group transition-all duration-300"
             >
