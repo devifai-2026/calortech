@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,30 +18,60 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Set initial active section from hash on mount
+  // ─── Scroll spy via IntersectionObserver ───────────────────────────────────
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      setActiveSection(hash);
-    } else {
-      setActiveSection("hero"); // Default active section
-    }
-  }, []);
+    if (location.pathname !== "/") return;
 
-  // Update active section when hash changes
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-      setActiveSection(hash || "hero");
-    };
+    const sectionIds = ["hero", "solutions", "services", "process", "projects", "contact", "careers"];
 
-    // Listen for hash changes
-    window.addEventListener("hashchange", handleHashChange);
-    
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
+    // Track which sections are currently visible
+    const visibleSections = new Set();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        // Pick the first section (in DOM order) that is currently visible
+        const firstVisible = sectionIds.find((id) => visibleSections.has(id));
+        if (firstVisible) {
+          setActiveSection(firstVisible);
+          // Keep URL hash in sync without triggering a scroll
+          window.history.replaceState(null, "", `#${firstVisible}`);
+        }
+      },
+      {
+        // Fire when at least 20% of the section is in view
+        threshold: 0.2,
+        // Shrink the root box so top-navbar doesn't block detection
+        rootMargin: "-80px 0px 0px 0px",
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Set initial active section on mount
+    const initHash = window.location.hash.slice(1);
+    setActiveSection(initHash || "hero");
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // ─── Active check (pure state comparison) ─────────────────────────────────
+  const isSectionActive = (sectionId) => {
+    if (location.pathname !== "/") return false;
+    return activeSection === sectionId;
+  };
+
+
 
   const navLinks = [
     { name: "Home", path: "/", sectionId: "hero" },
@@ -54,6 +84,7 @@ const Navbar = () => {
   ];
 
   const handleNavClick = (path, sectionId, e) => {
+
     e.preventDefault();
     setIsOpen(false);
     
@@ -92,17 +123,7 @@ const Navbar = () => {
     }
   };
 
-  // Improved active section check
-  const isSectionActive = (sectionId) => {
-    if (location.pathname !== "/") return false;
-    
-    // Special handling for hero section (when no hash or hash is #hero)
-    if (sectionId === "hero") {
-      return !window.location.hash || window.location.hash === "#hero" || activeSection === "hero";
-    }
-    
-    return activeSection === sectionId || window.location.hash === `#${sectionId}`;
-  };
+
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 mb-5 ${
@@ -127,14 +148,11 @@ const Navbar = () => {
               }`}>
                CALOR TECH ENGINEERS LLP
               </h1>
-              {/* <div className="flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-blue-600" />
-                <p className={`text-xs font-semibold italic tracking-wider transition-colors duration-300 ${
-                  scrolled ? "text-blue-700" : "text-blue-600"
-                }`}>
-                  Engineering To Execution
-                </p>
-              </div> */}
+              <p className={`text-xs font-semibold italic tracking-wider transition-colors duration-300 ${
+                scrolled ? "text-blue-400" : "text-blue-200"
+              }`}>
+                Engineering to Execution.
+              </p>
             </div>
           </Link>
 

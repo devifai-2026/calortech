@@ -19,7 +19,7 @@ const Hero = () => {
   const projectItems = [
     {
       title: "50 TPD CPC Plant",
-      location: "Gujarat, India",
+      location: "Baruni, India",
       duration: "12 Months",
       status: "Completed",
       category: "CPC Plants",
@@ -28,16 +28,16 @@ const Hero = () => {
     },
     {
       title: "Waste Heat Recovery System",
-      location: "Maharashtra, India",
+      location: "Baruni / Guwahati / West Bengal",
       duration: "8 Months",
-      status: "Ongoing",
+      status: "Completed",
       category: "Energy Recovery",
-      description: "Design and installation of WHRB for cement plant",
+      description: "Design and installation of WHRB for industrial plants",
       image: two,
     },
     {
       title: "Industrial Paste Plant",
-      location: "Tamil Nadu, India",
+      location: "India",
       duration: "10 Months",
       status: "Completed",
       category: "Paste Plants",
@@ -46,36 +46,37 @@ const Hero = () => {
     },
     {
       title: "Tyre Pyrolysis Unit",
-      location: "Karnataka, India",
-      duration: "6 Months",
-      status: "Completed",
+      location: "India",
+      duration: "–",
+      status: "Upcoming",
       category: "Renewable",
       description: "Environment-friendly waste recycling plant",
       image: four,
     },
     {
-      title: "Biomass Gasification Plant",
-      location: "Punjab, India",
-      duration: "14 Months",
-      status: "Ongoing",
-      category: "Renewable Energy",
-      description: "Sustainable energy generation from agricultural waste",
+      title: "Material Handling",
+      location: "West Bengal / Bihar / Jharkhand / MP",
+      duration: "–",
+      status: "Completed",
+      category: "Material Handling",
+      description: "Integrated material handling systems across multiple sites",
       image: five,
     },
     {
-      title: "Cement Grinding Unit",
-      location: "Rajasthan, India",
-      duration: "18 Months",
+      title: "Food Processing Plant",
+      location: "Agartala, India",
+      duration: "–",
       status: "Completed",
-      category: "Cement Plants",
-      description: "State-of-the-art grinding and packing facility",
+      category: "Food Processing",
+      description: "End-to-end food processing plant engineering and setup",
       image: six,
     },
   ];
 
+
   const stats = [
     {
-      value: "100+",
+      value: "30+",
       label: "Projects Delivered",
       sublabel: "Across 15+ Countries",
     },
@@ -161,18 +162,18 @@ const Hero = () => {
           {/* Tagline */}
           <div className="mb-6 inline-block">
             <span className="text-sm md:text-base font-semibold text-blue-300 tracking-widest uppercase">
-              ✨ Engineering Excellence Since 15 Years
+              ✨ Engineering to Execution.
             </span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight text-white drop-shadow-2xl uppercase">
-            Engineering
+            Engineering Excellence
             <span className="mx-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-200 to-cyan-200">
-              To
+              since
             </span>
             <br />
-            Execution.
+            15+ Years.
           </h1>
 
           {/* Subtitle */}

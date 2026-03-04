@@ -3,7 +3,6 @@ import Services from "../components/Services";
 import Process from "../components/Process";
 import CoreExpertise from "../components/CoreExpertise";
 import Projects from "../components/Projects";
-import Testimonials from "../components/Testimonials";
 import CTA from "../components/CTA";
 import FooterCTA from "../components/FooterCTA";
 import Careers from "../components/Careers";
@@ -44,9 +43,6 @@ const Home = () => {
       </section>
 
      
-
-      {/* Testimonials Section */}
-      <Testimonials />
 
       {/* CTA Section */}
       {/* <CTA /> */}

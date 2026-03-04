@@ -56,7 +56,7 @@ const Solutions = () => {
         "Dust Control Systems",
         "Thermal Analysis"
       ],
-      stats: { projects: 25, efficiency: "95%", capacity: "50-200 TPD" },
+      stats: { projects: 5, efficiency: "95%", capacity: "50-200 TPD" },
       color: "from-blue-600 to-blue-800"
     },
     {
@@ -72,7 +72,7 @@ const Solutions = () => {
         "Auxiliary Systems",
         "Reliability Analysis"
       ],
-      stats: { projects: 18, efficiency: "92%", capacity: "Custom" },
+      stats: { projects: 1, efficiency: "92%", capacity: "Custom" },
       color: "from-indigo-600 to-indigo-800"
     },
     {
@@ -88,7 +88,7 @@ const Solutions = () => {
         "Material Handling",
         "Automation"
       ],
-      stats: { projects: 32, efficiency: "98%", accuracy: "99.5%" },
+      stats: { projects: 10, efficiency: "98%", accuracy: "99.5%" },
       color: "from-emerald-600 to-emerald-800"
     },
     {
@@ -104,7 +104,7 @@ const Solutions = () => {
         "Steam Integration",
         "Performance Analysis"
       ],
-      stats: { projects: 45, efficiency: "85%", savings: "Up to 30%" },
+      stats: { projects: 5, efficiency: "85%", savings: "Up to 30%" },
       color: "from-amber-600 to-amber-800"
     },
     {
@@ -120,7 +120,7 @@ const Solutions = () => {
         "Carbon Black Handling",
         "Environmental Compliance"
       ],
-      stats: { projects: 28, efficiency: "88%", capacity: "10-50 TPD" },
+      stats: { projects: "Upcoming", efficiency: "--", capacity: "50–100 TPD" },
       color: "from-purple-600 to-purple-800"
     },
     {
@@ -136,7 +136,7 @@ const Solutions = () => {
         "Fabrication Support",
         "Testing & Inspection"
       ],
-      stats: { projects: 150, certification: "ASME U", pressure: "Up to 300 Bar" },
+      stats: { projects: 10, certification: "ASME U", pressure: "Up to 300 Bar" },
       color: "from-red-600 to-red-800"
     },
     {
@@ -152,7 +152,7 @@ const Solutions = () => {
         "Wind Load Analysis",
         "Modular Design"
       ],
-      stats: { projects: 85, capacity: "Unlimited", compliance: "IS 800" },
+      stats: { projects: 15, capacity: "Unlimited", compliance: "IS 800" },
       color: "from-gray-600 to-gray-800"
     },
     {
@@ -168,7 +168,7 @@ const Solutions = () => {
         "Grid Management",
         "ROI Analysis"
       ],
-      stats: { projects: 65, savings: "20-40%", payback: "2-3 Years" },
+      stats: { projects: "Upcoming", savings: "--", payback: "--" },
       color: "from-green-600 to-green-800"
     }
   ];
@@ -222,7 +222,7 @@ const Solutions = () => {
               <div className="p-3 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors">
                 <Award className="w-6 h-6 text-blue-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900">200+</div>
+              <div className="text-3xl font-bold text-gray-900">30+</div>
             </div>
             <h3 className="font-semibold text-gray-700 mb-1">Projects Delivered</h3>
             <p className="text-sm text-gray-500">Across 15+ countries</p>
