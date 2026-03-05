@@ -19,7 +19,7 @@ const Hero = () => {
   const projectItems = [
     {
       title: "50 TPD CPC Plant",
-      location: "Baruni, India",
+      location: "Baruni / Bihar, India",
       duration: "12 Months",
       status: "Completed",
       category: "CPC Plants",
@@ -37,7 +37,7 @@ const Hero = () => {
     },
     {
       title: "Industrial Paste Plant",
-      location: "India",
+      location: "Baruni / Guwahati / West Bengal",
       duration: "10 Months",
       status: "Completed",
       category: "Paste Plants",
@@ -159,13 +159,7 @@ const Hero = () => {
       {/* Main Hero Content */}
       <div className="relative z-10 flex-1 flex items-center justify-center px-4 py-20">
         <div className="w-full max-w-4xl text-center">
-          {/* Tagline */}
-          <div className="mb-6 inline-block">
-            <span className="text-sm md:text-base font-semibold text-blue-300 tracking-widest uppercase">
-              ✨ Engineering to Execution.
-            </span>
-          </div>
-
+         
           {/* Main Headline */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight text-white drop-shadow-2xl uppercase">
             Engineering Excellence
