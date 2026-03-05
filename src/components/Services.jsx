@@ -7,6 +7,7 @@ import {
   Wrench,
   Zap,
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   Thermometer,
   FlaskRound,
@@ -19,6 +20,13 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -139,85 +147,99 @@ const Services = () => {
 
   return (
     <>
-      {/* Our Specialized Solutions – Card Grid */}
-      <section id="services" className="relative py-16 w-full overflow-hidden bg-white">
+      {/* Our Specialized Solutions – Slider */}
+      <section id="services" className="relative py-20 w-full overflow-hidden bg-white">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-16 max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1e293b] mb-4">
               Our Specialized Solutions
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               Tailored engineering solutions for diverse industrial applications
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {specializedSolutions.map((solution, index) => (
-              <div
-                key={solution.id}
-                className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                {/* Gradient top bar */}
-                <div className={`h-2 bg-gradient-to-r ${solution.color}`}></div>
-
-                <div className="p-6">
-                  {/* Icon and Category */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${solution.color} text-white`}>
-                      {solution.icon}
-                    </div>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">
-                      {solution.category}
-                    </span>
-                  </div>
-
-                  {/* Title and Description */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{solution.title}</h3>
-                  <p className="text-gray-600 mb-6">{solution.description}</p>
-
-                  {/* Features */}
-                  <div className="space-y-3 mb-8">
-                    {solution.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{feature}</span>
+          <div className="relative max-w-5xl mx-auto group">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation={{
+                prevEl: '.swiper-button-prev-custom',
+                nextEl: '.swiper-button-next-custom',
+              }}
+              pagination={{
+                el: '.swiper-pagination-custom',
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              className="rounded-[40px] overflow-hidden shadow-2xl"
+            >
+              {specializedSolutions.map((solution, index) => (
+                <SwiperSlide key={solution.id}>
+                  <div className={`bg-gradient-to-br ${solution.color} text-white p-8 md:p-14 rounded-[40px] flex flex-col md:flex-row gap-8 items-center min-h-[450px]`}>
+                    {/* Left Content */}
+                    <div className="flex-1 space-y-8">
+                      <div className="flex items-center gap-6">
+                        <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+                          {React.cloneElement(solution.icon, { className: "w-8 h-8 text-white" })}
+                        </div>
+                        <div className="space-y-3">
+                          <h3 className="text-3xl md:text-4xl font-bold">{solution.title}</h3>
+                          <div className="flex flex-wrap gap-2">
+                             <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
+                                {solution.category}
+                              </span>
+                          </div>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                      
+                      <p className="text-white/90 text-lg leading-relaxed max-w-xl">
+                        {solution.description}
+                      </p>
 
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    {Object.entries(solution.stats).map(([key, value], idx) => (
-                      <div key={idx} className="text-center">
-                        <div className="text-lg font-bold text-gray-900">{value}</div>
-                        <div className="text-xs text-gray-500 capitalize">{key}</div>
+                      <button 
+                        onClick={() => scrollToContact()}
+                        className="bg-white text-gray-900 px-8 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-gray-100 transition-colors w-fit shadow-lg"
+                      >
+                        Learn More <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    {/* Right Content: Key Features */}
+                    <div className="w-full md:w-[400px]">
+                      <div className="bg-black/10 backdrop-blur-md rounded-3xl p-8 border border-white/10">
+                        <h4 className="text-xl font-bold mb-6">Key Features</h4>
+                        <ul className="space-y-4">
+                          {solution.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-center gap-4">
+                              <div className="bg-emerald-500/20 p-1 rounded-full">
+                                <CheckCircle className="w-4 h-4 text-emerald-400" />
+                              </div>
+                              <span className="text-white/90 font-medium">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Action Footer */}
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                    <button
-                      onClick={scrollToContact}
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm group"
-                    >
-                      Learn More
-                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                    <div className="text-xs text-gray-400">
-                      {index + 1}/{specializedSolutions.length}
                     </div>
                   </div>
-                </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-                {/* Hover overlay */}
-                {hoveredCard === index && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent pointer-events-none"></div>
-                )}
-              </div>
-            ))}
+            {/* Custom Controls */}
+            <div className="flex items-center justify-center gap-6 mt-10">
+              <button className="swiper-button-prev-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-blue-600 hover:border-blue-600 transition-all cursor-pointer bg-white shadow-sm">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <div className="swiper-pagination-custom"></div>
+              <button className="swiper-button-next-custom w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-blue-600 hover:border-blue-600 transition-all cursor-pointer bg-white shadow-sm">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

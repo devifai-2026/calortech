@@ -20,11 +20,11 @@ const Home = () => {
         <Solutions />
       </section>
 
-      {/* Services Section */}
-      <Services />
-
       {/* Process Section */}
       <Process />
+
+      {/* Services Section */}
+      <Services />
 
       {/* Core Expertise Section */}
       <CoreExpertise />

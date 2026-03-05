@@ -78,10 +78,10 @@ const Hero = () => {
     {
       value: "30+",
       label: "Projects Delivered",
-      sublabel: "Across 15+ Countries",
+      sublabel: "Across 1 Country",
     },
     { value: "50+", label: "Happy Clients", sublabel: "95% Retention Rate" },
-    { value: "15+", label: "Countries Served", sublabel: "Global Presence" },
+    { value: "1", label: "Countries Served", sublabel: "Global Presence" },
     { value: "24/7", label: "Support", sublabel: "Always Available" },
   ];
 

@@ -78,7 +78,7 @@ const Careers = () => {
               <div className="p-3 bg-purple-50 rounded-xl inline-block mb-3">
                 <Globe className="w-6 h-6 text-purple-600 mx-auto" />
               </div>
-              <div className="text-3xl font-bold text-gray-900">15+</div>
+              <div className="text-3xl font-bold text-gray-900">1</div>
               <p className="text-sm text-gray-600">Countries</p>
             </div>
           </div>
