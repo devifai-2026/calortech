@@ -56,12 +56,12 @@ const Careers = () => {
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
               <div className="p-3 bg-blue-50 rounded-xl inline-block mb-3">
                 <Users className="w-6 h-6 text-blue-600 mx-auto" />
               </div>
-              <div className="text-3xl font-bold text-gray-900">50+</div>
+              <div className="text-3xl font-bold text-gray-900">10+</div>
               <p className="text-sm text-gray-600">Team Members</p>
             </div>
             
@@ -72,14 +72,7 @@ const Careers = () => {
               <div className="text-3xl font-bold text-gray-900">30%</div>
               <p className="text-sm text-gray-600">Annual Growth</p>
             </div>
-            
-            <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-              <div className="p-3 bg-amber-50 rounded-xl inline-block mb-3">
-                <Award className="w-6 h-6 text-amber-600 mx-auto" />
-              </div>
-              <div className="text-3xl font-bold text-gray-900">25+</div>
-              <p className="text-sm text-gray-600">Awards Won</p>
-            </div>
+
             
             <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
               <div className="p-3 bg-purple-50 rounded-xl inline-block mb-3">

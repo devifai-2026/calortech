@@ -111,7 +111,6 @@ const Services = () => {
     { name: "Tyre Pyrolysis", icon: <FlaskRound /> },
     { name: "TFH Systems", icon: <Thermometer /> },
     { name: "Pressure Vessels", icon: <Package /> },
-    { name: "Industrial Structures", icon: <Building /> },
     { name: "Energy Systems", icon: <Battery /> },
     { name: "Process Optimization", icon: <Settings /> },
     { name: "Detail Engineering", icon: <Wrench /> },

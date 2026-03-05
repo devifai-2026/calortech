@@ -64,7 +64,7 @@ const Solutions = () => {
       title: "ECA Plants",
       description: "Energy-efficient anode baking furnace systems with optimized utilities",
       icon: <Zap className="w-8 h-8" />,
-      category: "High Temperature",
+      category: "Thermal Processing",
       features: [
         "Furnace Engineering",
         "Cooling Systems",
@@ -92,6 +92,54 @@ const Solutions = () => {
       color: "from-emerald-600 to-emerald-800"
     },
     {
+      id: "material-handling",
+      title: "Material Handling",
+      description: "Advanced bulk material handling and conveying systems",
+      icon: <GitBranch className="w-8 h-8" />,
+      category: "Processing",
+      features: [
+        "Conveyor Systems",
+        "Silo & Storage",
+        "Feeding Systems",
+        "Pneumatic Conveying",
+        "Load-out Stations"
+      ],
+      stats: { projects: 20, capacity: "Up to 1000 TPH", reliability: "99.9%" },
+      color: "from-slate-600 to-slate-800"
+    },
+    {
+      id: "food-processing",
+      title: "Food Processing",
+      description: "Hygienic and efficient systems for food industry applications",
+      icon: <Sparkles className="w-8 h-8" />,
+      category: "Processing",
+      features: [
+        "Hygienic Design",
+        "Processing Lines",
+        "Thermal Treatment",
+        "Automated Packaging",
+        "Quality Control"
+      ],
+      stats: { projects: "New", compliance: "FDA/HACCP", efficiency: "98%" },
+      color: "from-orange-600 to-orange-800"
+    },
+    {
+      id: "automation",
+      title: "Process Automation",
+      description: "Integrated control systems and industrial automation solutions",
+      icon: <Cpu className="w-8 h-8" />,
+      category: "Processing",
+      features: [
+        "PLC/SCADA Systems",
+        "DCS Integration",
+        "Instrument Calibration",
+        "Remote Monitoring",
+        "Process Optimization"
+      ],
+      stats: { projects: 25, automation: "100%", efficiency: "+20%" },
+      color: "from-cyan-600 to-cyan-800"
+    },
+    {
       id: "whrb",
       title: "WHRB / HRU Systems",
       description: "Waste heat recovery solutions for energy conservation",
@@ -106,6 +154,22 @@ const Solutions = () => {
       ],
       stats: { projects: 5, efficiency: "85%", savings: "Up to 30%" },
       color: "from-amber-600 to-amber-800"
+    },
+    {
+      id: "energy",
+      title: "Energy Systems",
+      description: "Integrated energy management and optimization",
+      icon: <Battery className="w-8 h-8" />,
+      category: "Energy Recovery",
+      features: [
+        "Energy Audit",
+        "System Optimization",
+        "Renewable Integration",
+        "Grid Management",
+        "ROI Analysis"
+      ],
+      stats: { projects: "Upcoming", savings: "--", payback: "--" },
+      color: "from-green-600 to-green-800"
     },
     {
       id: "pyrolysis",
@@ -138,38 +202,6 @@ const Solutions = () => {
       ],
       stats: { projects: 10, certification: "ASME U", pressure: "Up to 300 Bar" },
       color: "from-red-600 to-red-800"
-    },
-    {
-      id: "structures",
-      title: "Industrial Structures",
-      description: "Robust structural solutions for industrial applications",
-      icon: <Building className="w-8 h-8" />,
-      category: "Structural",
-      features: [
-        "Steel Structures",
-        "Foundation Design",
-        "Seismic Analysis",
-        "Wind Load Analysis",
-        "Modular Design"
-      ],
-      stats: { projects: 15, capacity: "Unlimited", compliance: "IS 800" },
-      color: "from-gray-600 to-gray-800"
-    },
-    {
-      id: "energy",
-      title: "Energy Systems",
-      description: "Integrated energy management and optimization",
-      icon: <Battery className="w-8 h-8" />,
-      category: "Energy",
-      features: [
-        "Energy Audit",
-        "System Optimization",
-        "Renewable Integration",
-        "Grid Management",
-        "ROI Analysis"
-      ],
-      stats: { projects: "Upcoming", savings: "--", payback: "--" },
-      color: "from-green-600 to-green-800"
     }
   ];
 
@@ -177,7 +209,7 @@ const Solutions = () => {
     { id: "all", name: "All Solutions", icon: <Target />, count: solutions.length },
     { id: "Thermal Processing", name: "Thermal", icon: <Thermometer />, count: 2 },
     { id: "Energy Recovery", name: "Energy", icon: <Zap />, count: 2 },
-    { id: "Processing", name: "Processing", icon: <Cog />, count: 2 },
+    { id: "Processing", name: "Processing", icon: <Cog />, count: 4 },
     { id: "Renewable", name: "Renewable", icon: <Leaf />, count: 1 },
     { id: "Equipment", name: "Equipment", icon: <Package />, count: 1 },
   ];
