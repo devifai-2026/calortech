@@ -2,6 +2,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
   return (
@@ -12,9 +13,11 @@ function App() {
           <Home />
         </main>
         <Footer />
+        <WhatsAppButton />
       </div>
     </Router>
   );
 }
+
 
 export default App;
