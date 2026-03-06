@@ -250,7 +250,7 @@ const About = () => {
                         color: "from-emerald-500 to-emerald-600",
                       },
                       {
-                        value: "15+",
+                        value: "1",
                         label: "Countries Served",
                         icon: <Globe className="w-8 h-8 md:w-12 md:h-12" />,
                         color: "from-amber-500 to-amber-600",
