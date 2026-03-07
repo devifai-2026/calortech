@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
+import logo from "../assets/CTE-Logo.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -134,13 +135,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group" onClick={() => setActiveSection("hero")}>
+          <Link to="/" className="flex items-center space-x-1 group" onClick={() => setActiveSection("hero")}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
               scrolled 
-                ? "bg-gradient-to-br from-blue-600 to-blue-800 shadow-lg" 
-                : "bg-gradient-to-br from-blue-700 to-blue-900 shadow-xl"
+                ? " " 
+                : ""
             }`}>
-              <div className="text-white font-bold text-xl">CT</div>
+              <div className="text-white font-bold text-xl"><img src={logo} className="w-16 h-16" alt="" /></div>
             </div>
             <div>
               <h1 className={`text-base font-bold tracking-tight transition-colors duration-300 ${

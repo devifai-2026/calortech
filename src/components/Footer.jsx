@@ -7,6 +7,7 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import logo from "../assets/CTE-Logo.png"
 
 const Footer = () => {
   const handleFooterClick = (sectionId, e) => {
@@ -61,9 +62,9 @@ const Footer = () => {
         <div className="md:hidden">
           {/* Logo and Description */}
           <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center p-2">
-                <div className="text-white font-bold text-lg">CT</div>
+            <div className="flex items-center gap-1 mb-4">
+              <div className="w-16 h-16 rounded-lg flex items-center justify-center  p-1">
+                <div className="text-white font-bold text-lg"><img src={logo} className="w-16 h-16" alt="" /></div>
               </div>
               <div>
                 <h3 className="font-bold text-base">Calor Tech Engineers LLP</h3>
@@ -170,9 +171,9 @@ const Footer = () => {
         {/* Desktop/Tablet Layout - 4 Columns */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center p-2">
-                <div className="text-white font-bold text-xl">CT</div>
+            <div className="flex items-center gap-1 mb-6">
+              <div className="w-16 h-16 rounded-lg flex items-center justify-center p-2">
+                <div className="text-white font-bold text-xl"><img src={logo} className="w-16 h-16" alt="" /></div>
               </div>
               <div>
                 <h3 className="font-bold text-lg">Calor Tech Engineers LLP</h3>
