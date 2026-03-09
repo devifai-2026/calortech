@@ -81,7 +81,7 @@ const Process = () => {
               </p>
               <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-gray-100">
                 <div className="text-xs md:text-sm text-gray-500">
-                  Duration: 2-4 Weeks
+                  Delivery Timeline: Based on project requirements
                 </div>
               </div>
             </div>

@@ -118,7 +118,7 @@ Please respond with relevant details or attach available documents.`;
     {
       icon: <Mail className="w-8 h-8" />,
       title: "Email Us",
-      content: "info@calortechengineers.com",
+      content: "cte@calortech.in ",
       secondary: "Response within 24 hours",
       color: "from-indigo-600 to-indigo-800",
       bg: "bg-gradient-to-br from-indigo-50 to-indigo-100"
@@ -144,7 +144,7 @@ Please respond with relevant details or attach available documents.`;
     {
       step: "02",
       title: "Consultation",
-      description: "Free technical consultation",
+      description: "Ready to discuss your project ",
       icon: <HeadphonesIcon className="w-6 h-6" />,
       color: "from-indigo-500 to-indigo-600"
     },
@@ -399,7 +399,7 @@ Please respond with relevant details or attach available documents.`;
                     <span>Share via WhatsApp</span>
                   </a>
                   <a
-                    href="mailto:info@calortechengineers.com"
+                    href="mailto:cte@calortech.in "
                     className="flex-1 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white py-4 rounded-xl font-bold text-lg text-center transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
                   >
                     <Mail className="w-5 h-5" />
@@ -458,7 +458,7 @@ Please respond with relevant details or attach available documents.`;
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </a>
               <a
-                href="mailto:info@calortechengineers.com"
+                href="mailto:cte@calortech.in"
                 className="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white px-12 py-5 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3 group"
               >
                 <Mail className="w-5 h-5" />
@@ -468,7 +468,7 @@ Please respond with relevant details or attach available documents.`;
             </div>
             
             <p className="text-blue-200 mt-8 text-sm">
-              ⚡ Free initial consultation | 📋 Detailed proposal in 48 hours | 🌍 Global project support
+              ⚡ Ready to initial consultation | 📋 Detailed proposal in 48 hours | 🌍 Global project support
             </p>
           </div>
         </div>

@@ -27,7 +27,7 @@ const Home = () => {
       <Services />
 
       {/* Core Expertise Section */}
-      <CoreExpertise />
+      {/* <CoreExpertise /> */}
 
       {/* Projects Section */}
       <Projects />

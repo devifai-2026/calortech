@@ -7,10 +7,11 @@ import three from "../assets/Hero/three.jpg";
 import four from "../assets/Hero/four.jpg";
 import five from "../assets/Hero/five.jpg";
 import six from "../assets/Hero/six.jpg";
+import heroBanner from "../assets/Hero/hero_banner.png";
 
 const Hero = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const [activeImage, setActiveImage] = useState(one); // Default image
+  const [activeImage, setActiveImage] = useState(heroBanner); // New default image
   const [isHovering, setIsHovering] = useState(false); // Track if hovering
   const navigate = useNavigate();
   const location = useLocation();
@@ -127,7 +128,7 @@ const Hero = () => {
   // Handle project card mouse leave - reset to default
   const handleProjectMouseLeave = () => {
     setIsHovering(false);
-    setActiveImage(one); // Reset to default image
+    setActiveImage(heroBanner); // Reset to new default banner
   };
 
   useEffect(() => {

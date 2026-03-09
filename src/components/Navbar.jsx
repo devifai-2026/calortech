@@ -135,13 +135,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-1 group" onClick={() => setActiveSection("hero")}>
+          <Link to="/" className="flex items-center group" onClick={() => setActiveSection("hero")}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
               scrolled 
                 ? " " 
                 : ""
             }`}>
-              <div className="text-white font-bold text-xl"><img src={logo} className="w-16 h-16" alt="" /></div>
+              <div className="text-white font-bold text-xl"><img src={logo} className="w-16 h-16 " alt="" /></div>
             </div>
             <div>
               <h1 className={`text-base font-bold tracking-tight transition-colors duration-300 ${
@@ -196,7 +196,7 @@ const Navbar = () => {
               <a
                 href="#projects"
                 onClick={(e) => handleNavClick("/", "projects", e)}
-                className="border-2 border-blue-600 hover:border-blue-700 text-blue-700 hover:text-blue-800 px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
+                className="border-2 border-blue-600 hover:border-blue-700 text-white hover:text-blue-800 px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -17,33 +17,25 @@ const Careers = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        <div className="text-center mb-6 max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 px-6 py-2 rounded-full mb-6 shadow-sm">
             <Sparkles className="w-4 h-4" />
             <span className="text-sm font-semibold">Join Our Team</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Build Your Career
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 block">
-              With Excellence
-            </span>
-          </h2>
-          
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto mb-5">
-            Join a team of passionate engineers and innovators working on cutting-edge 
-            industrial projects. Grow your career while making a real impact.
-          </p>
-
-          {/* Apply Button */}
-          <button 
-            onClick={scrollToContact}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            Apply Now
-            <ArrowRight className="w-5 h-5" />
-          </button>
+        
+      <p>Join our team of engineers and innovators working on industrial projects. Grow your career while making a real impact.</p>
         </div>
+          {/* Apply Button */}
+          <div className="flex justify-center mb-6">
+            <button 
+              onClick={scrollToContact}
+              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Apply Now
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
 
         {/* Benefits Section - Simplified */}
         <div className="max-w-5xl mx-auto mb-4">

@@ -119,7 +119,6 @@ const Services = () => {
     { name: "Tyre Pyrolysis", icon: <FlaskRound /> },
     { name: "TFH Systems", icon: <Thermometer /> },
     { name: "Pressure Vessels", icon: <Package /> },
-    { name: "Energy Systems", icon: <Battery /> },
     { name: "Process Optimization", icon: <Settings /> },
     { name: "Detail Engineering", icon: <Wrench /> },
     { name: "Commissioning", icon: <GitBranch /> },
@@ -252,7 +251,7 @@ const Services = () => {
               Comprehensive Services
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              End-to-end engineering solutions across multiple domains
+              Integrated engineering solutions covering multiple industrial domains, from concept development to commissioning and operational support.
             </p>
           </div>
 

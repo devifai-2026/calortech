@@ -3,24 +3,16 @@ import {
   Factory,
   Zap,
   Cog,
-  Wrench,
   FlaskRound,
   Thermometer,
   Package,
-  Building,
   Battery,
   Settings,
   GitBranch,
-  CheckCircle,
-  Target,
   Shield,
   TrendingUp,
-  Leaf,
-  DollarSign,
-  Clock,
   Users,
   Award,
-  ArrowRight,
   ChevronRight,
   BarChart3,
   Cpu,
@@ -30,8 +22,6 @@ import {
 } from "lucide-react";
 
 const Solutions = () => {
-  const [activeTab, setActiveTab] = useState("all");
-
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
@@ -124,22 +114,6 @@ const Solutions = () => {
       color: "from-orange-600 to-orange-800"
     },
     {
-      id: "automation",
-      title: "Process Automation",
-      description: "Integrated control systems and industrial automation solutions",
-      icon: <Cpu className="w-8 h-8" />,
-      category: "Processing",
-      features: [
-        "PLC/SCADA Systems",
-        "DCS Integration",
-        "Instrument Calibration",
-        "Remote Monitoring",
-        "Process Optimization"
-      ],
-      stats: { projects: 25, automation: "100%", efficiency: "+20%" },
-      color: "from-cyan-600 to-cyan-800"
-    },
-    {
       id: "whrb",
       title: "WHRB / HRU Systems",
       description: "Waste heat recovery solutions for energy conservation",
@@ -202,21 +176,22 @@ const Solutions = () => {
       ],
       stats: { projects: 10, certification: "ASME U", pressure: "Up to 300 Bar" },
       color: "from-red-600 to-red-800"
+    },
+    {
+      id: "automation",
+      title: "Automation",
+      description: "Smart control systems and industrial automation solutions",
+      icon: <Settings className="w-8 h-8" />,
+      category: "Engineering",
+      features: [
+        "PLC/SCADA",
+        "Control Panels",
+        "IIoT Solutions"
+      ],
+      stats: { projects: 15, reliability: "99.9%", uptime: "24/7" },
+      color: "from-cyan-600 to-cyan-800"
     }
   ];
-
-  const categories = [
-    { id: "all", name: "All Solutions", icon: <Target />, count: solutions.length },
-    { id: "Thermal Processing", name: "Thermal", icon: <Thermometer />, count: 2 },
-    { id: "Energy Recovery", name: "Energy", icon: <Zap />, count: 2 },
-    { id: "Processing", name: "Processing", icon: <Cog />, count: 4 },
-    { id: "Renewable", name: "Renewable", icon: <Leaf />, count: 1 },
-    { id: "Equipment", name: "Equipment", icon: <Package />, count: 1 },
-  ];
-
-  const filteredSolutions = activeTab === "all" 
-    ? solutions 
-    : solutions.filter(solution => solution.category === activeTab);
 
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -235,15 +210,14 @@ const Solutions = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Engineering Solutions That
+           Engineering to Execution 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 block">
-              Drive Excellence
+              Delivering Industrial Excellence.
             </span>
           </h2>
           
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Comprehensive engineering solutions tailored to your specific industrial needs. 
-            From concept to commissioning, we deliver innovative, efficient, and reliable systems.
+            Delivering comprehensive engineering solutions tailored to industrial needs — from concept and design to execution and commissioning.
           </p>
         </div>
 
@@ -265,7 +239,7 @@ const Solutions = () => {
               <div className="p-3 bg-emerald-50 rounded-xl group-hover:bg-emerald-100 transition-colors">
                 <Users className="w-6 h-6 text-emerald-600" />
               </div>
-              <div className="text-3xl font-bold text-gray-900">50+</div>
+              <div className="text-3xl font-bold text-gray-900">10+</div>
             </div>
             <h3 className="font-semibold text-gray-700 mb-1">Expert Engineers</h3>
             <p className="text-sm text-gray-500">Dedicated team</p>
@@ -294,98 +268,42 @@ const Solutions = () => {
           </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="mb-12">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveTab(category.id)}
-                className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeTab === category.id
-                    ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg"
-                    : "bg-white text-gray-700 hover:bg-gray-50 shadow-sm hover:shadow-md"
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4">{category.icon}</span>
-                  {category.name}
-                </span>
-                <span className={`px-2 py-1 rounded-full text-xs ${
-                  activeTab === category.id 
-                    ? "bg-white/20" 
-                    : "bg-gray-100"
-                }`}>
-                  {category.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
+
 
         {/* Solutions Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {filteredSolutions.map((solution, index) => (
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
+          {solutions.map((solution, index) => (
             <div
               key={solution.id}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1"
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Gradient Header */}
-              <div className={`h-2 bg-gradient-to-r ${solution.color}`}></div>
+              <div className={`h-1.5 bg-gradient-to-r ${solution.color}`}></div>
               
-              <div className="p-6">
-                {/* Icon and Category */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-br ${solution.color} text-white`}>
-                    {solution.icon}
+              <div className="p-4">
+                {/* Icon */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className={`p-2 rounded-xl bg-gradient-to-br ${solution.color} text-white`}>
+                    {React.cloneElement(solution.icon, { className: "w-5 h-5" })}
                   </div>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-semibold">
-                    {solution.category}
-                  </span>
                 </div>
                 
                 {/* Title and Description */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{solution.title}</h3>
-                <p className="text-gray-600 mb-6">{solution.description}</p>
+                <h3 className="text-sm font-bold text-gray-900 mb-1 leading-tight">{solution.title}</h3>
+                <p className="text-[11px] text-gray-600 mb-3 line-clamp-2">{solution.description}</p>
                 
-                {/* Features */}
-                <div className="space-y-3 mb-8">
-                  {solution.features.slice(0, 3).map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      <span className="text-sm text-gray-700">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {Object.entries(solution.stats).map(([key, value], idx) => (
-                    <div key={idx} className="text-center">
-                      <div className="text-lg font-bold text-gray-900">{value}</div>
-                      <div className="text-xs text-gray-500 capitalize">{key}</div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Action Button */}
-                <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                  <button onClick={scrollToContact} className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold text-sm group">
-                    Learn More
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <div className="text-xs text-gray-400">
-                    {index + 1}/{filteredSolutions.length}
+                {/* Quick Stats */}
+                <div className="flex items-center justify-between pt-3 border-t border-gray-50">
+                  <div className="text-[10px] font-bold text-blue-600">
+                    {Object.values(solution.stats)[0]} Projects
                   </div>
+                  <button onClick={scrollToContact} className="text-blue-600 hover:text-blue-700 transition-colors">
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-              
-              {/* Hover Effect */}
-              {hoveredCard === index && (
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent pointer-events-none"></div>
-              )}
             </div>
           ))}
         </div>
