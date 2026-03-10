@@ -62,7 +62,7 @@ const Footer = () => {
         <div className="md:hidden">
           {/* Logo and Description */}
           <div className="mb-8">
-            <div className="flex items-center gap-1 mb-4">
+            <div className="flex items-center mb-4">
               <div className="w-16 h-16 rounded-lg flex items-center justify-center  p-1">
                 <div className="text-white font-bold text-lg"><img src={logo} className="w-16 h-16" alt="" /></div>
               </div>
@@ -135,7 +135,7 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-blue-400" />
                 <span className="text-gray-400 text-sm">
-                 dte.info20@gmail.com
+                 cte@calortech.in 
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -171,7 +171,7 @@ const Footer = () => {
         {/* Desktop/Tablet Layout - 4 Columns */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-1 mb-6">
+            <div className="flex items-center mb-6">
               <div className="w-16 h-16 rounded-lg flex items-center justify-center p-2">
                 <div className="text-white font-bold text-xl"><img src={logo} className="w-16 h-16" alt="" /></div>
               </div>
@@ -238,7 +238,7 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-blue-400" />
                 <span className="text-gray-400">
-                  dte.info20@gmail.com
+                  cte@calortech.in 
                 </span>
               </li>
               <li className="flex items-center gap-3">
