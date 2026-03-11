@@ -196,7 +196,9 @@ const Navbar = () => {
               <a
                 href="#projects"
                 onClick={(e) => handleNavClick("/", "projects", e)}
-                className="border-2 border-blue-600 hover:border-blue-700 text-white hover:text-blue-800 px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group"
+                className={`border-2 border-blue-600 hover:border-blue-700 ${
+                  scrolled ? "text-blue-700" : "text-white"
+                } hover:text-blue-800 px-3 py-1.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-blue-50 flex items-center justify-center gap-2 group`}
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

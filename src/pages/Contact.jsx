@@ -390,7 +390,7 @@ Please respond with relevant details or attach available documents.`;
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
-                    href="https://wa.me/918100537052"
+                    href={`https://wa.me/918100537052?text=${encodeURIComponent("Hello Calor Tech Engineers! I'm interested in your services.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-4 rounded-xl font-bold text-lg text-center transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-3"
