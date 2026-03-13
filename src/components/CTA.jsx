@@ -63,7 +63,7 @@ const CTA = () => {
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform" />
             </button>
             <a
-              href="https://wa.me/911234567890"
+              href={`https://wa.me/918100537052?text=${encodeURIComponent("Hello Calor Tech Engineers! I'm interested in your services.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-600 hover:bg-green-700 text-white px-6 md:px-12 py-4 md:py-5 rounded-xl font-bold text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl flex items-center justify-center gap-3 group"

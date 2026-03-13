@@ -29,7 +29,7 @@ const Projects = () => {
     },
     {
       title: "Industrial Paste Plant",
-      location: "India",
+      location: "Baruni / Guwahati / West Bengal",
       duration: "10 Months",
       description: "Turnkey paste plant with automation",
       status: "Completed",
